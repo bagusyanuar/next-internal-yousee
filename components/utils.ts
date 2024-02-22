@@ -37,3 +37,8 @@ export const InputRadius = {
 export const InputFontSize = {
     medium: '0.8em'
 }
+
+export const ButtonPadding = {
+    small: '0.5rem 2rem',
+    medium: '0.75rem 2.5rem'
+}
