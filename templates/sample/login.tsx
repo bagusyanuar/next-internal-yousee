@@ -12,7 +12,7 @@ function LoginTemplateSample() {
             <Wrapper>
                 <Image src='/assets/static/brand.png' width={150} height={150} alt='brand-image' priority />
                 <FormUsername icon='bx bx-user' placeholder='username' />
-                <InputPasswordIcon icon='bx bx-lock-alt' placeholder='Password' />
+                <InputPasswordIcon icon='bx bx-lock-alt' placeholder='password' />
             </Wrapper>
         </MainWrapper>
     )
