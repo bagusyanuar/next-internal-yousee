@@ -5,7 +5,8 @@ export const ColorScheme = {
     },
     primaryTint: {
         tint20: 'color-mix(in srgb, white 20%, var(--primary-color))',
-        tint80: 'color-mix(in srgb, white 80%, var(--primary-color))'
+        tint80: 'color-mix(in srgb, white 80%, var(--primary-color))',
+        tint90: 'color-mix(in srgb, white 90%, var(--primary-color))',
     },
     accent: 'var(--accent-color)',
     textLight: 'var(--light-color)',
@@ -42,3 +43,5 @@ export const ButtonPadding = {
     small: '0.5rem 2rem',
     medium: '0.75rem 2.5rem'
 }
+
+export const SidebarWidth = '260px';
