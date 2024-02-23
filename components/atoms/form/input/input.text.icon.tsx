@@ -3,19 +3,34 @@ import styled from 'styled-components'
 import { ColorScheme, InputRadius, InputFontSize } from '@/components/utils'
 
 interface IProps {
+    value: string
     icon: string
+    id?: string
+    name?: string
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
     className?: string
     placeholder?: string
 }
 const InputTextIcon: React.FC<IProps> = ({
+    value,
     icon,
+    id,
+    name,
+    onChange = (e) => { },
     className = '',
     placeholder = ''
 }) => {
     return (
         <Wrapper className={className}>
             <StyledIcon className={icon} />
-            <StyledInput type='text' placeholder={placeholder} />
+            <StyledInput
+                type='text'
+                id={id}
+                name={name}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+            />
         </Wrapper>
     )
 }

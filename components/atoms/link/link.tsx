@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ColorScheme } from '../utils'
+import { ColorScheme } from '@/components/utils'
 
 interface IProps { to: string, text: string, className?: string }
 const Link: React.FC<IProps> = ({

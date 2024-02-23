@@ -28,7 +28,7 @@ export default Button
 const StyledButton = styled.button`
     background-color: ${ColorScheme.primary};
     color: whitesmoke;
-    padding: ${ButtonPadding.small};
+    padding: ${ButtonPadding.medium};
     font-size: 0.8em;
     border-radius: 5px;
     transition: all ease-in-out 200ms;

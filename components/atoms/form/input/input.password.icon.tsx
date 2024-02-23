@@ -1,21 +1,59 @@
-import React from 'react'
+import React, { useState, HTMLInputTypeAttribute } from 'react'
 import styled from 'styled-components'
 import { ColorScheme, InputRadius, InputFontSize } from '@/components/utils'
 
 interface IProps {
+    value: string
     icon: string
+    id?: string
+    name?: string
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
     className?: string
     placeholder?: string
+    withShowPassword?: boolean
 }
 const InputPasswordIcon: React.FC<IProps> = ({
+    value,
     icon,
+    id,
+    name,
+    onChange = (e) => { },
     className = '',
-    placeholder = ''
+    placeholder = '',
+    withShowPassword = false
 }) => {
+    const [type, setType] = useState<HTMLInputTypeAttribute>('password')
+    const [showIcon, setShowIcon] = useState<string>('bx bx-show')
+
+    const handleChangeType = () => {
+        if (type === 'text') {
+            setType('password')
+            setShowIcon('bx bx-show')
+        }
+
+        if (type === 'password') {
+            setType('text')
+            setShowIcon('bx bx-low-vision')
+        }
+    }
     return (
         <Wrapper className={className}>
             <StyledIcon className={icon} />
-            <StyledInput type='password' placeholder={placeholder} />
+            <StyledInput
+                type={type}
+                id={id}
+                name={name}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder} />
+            {
+                withShowPassword
+                    ?
+                    <StyledShowPasswordIcon className={showIcon} onClick={handleChangeType} />
+                    :
+                    <></>
+            }
+
         </Wrapper>
     )
 }
@@ -46,6 +84,14 @@ const StyledIcon = styled.i`
     margin-left: 0.5rem;
     color: ${ColorScheme.textLight};
     transition: all ease-in-out 200ms;
+`
+
+const StyledShowPasswordIcon = styled.i`
+    background-color: transparent;
+    margin-right: 0.5rem;
+    color: ${ColorScheme.textLight};
+    transition: all ease-in-out 200ms;
+    cursor: pointer;
 `
 
 const Wrapper = styled.div`

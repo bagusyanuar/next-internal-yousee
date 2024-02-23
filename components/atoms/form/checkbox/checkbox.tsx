@@ -2,15 +2,29 @@ import { ColorScheme } from '@/components/utils'
 import React from 'react'
 import styled from 'styled-components'
 
-interface IProps { text: string, className?: string }
+interface IProps {
+    value: string
+    checked: boolean
+    text: string
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    className?: string
+}
 
 const Checkbox: React.FC<IProps> = ({
+    value,
+    checked,
     text,
+    onChange = (e) => { },
     className = ''
 }) => {
     return (
         <Wrapper className={className}>
-            <StyledInput type='checkbox' defaultChecked={true} />
+            <StyledInput
+                type='checkbox'
+                value={value}
+                checked={checked}
+                onChange={onChange}
+            />
             <StyledLabel>{text}</StyledLabel>
         </Wrapper>
     )
@@ -60,5 +74,4 @@ const StyledInput = styled.input`
 const StyledLabel = styled.label`
     font-size: 0.8em;
     color: ${ColorScheme.textDark};
-    line-height: 1;
 `

@@ -2,27 +2,28 @@ import React from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 import { ColorScheme, CardPadding } from '@/components/utils'
-import { Card } from '@/components/card'
-import { InputTextIcon, InputPasswordIcon } from '@/components/form/input'
-import { Button } from '@/components/form/button'
-import { Checkbox } from '@/components/form/checkbox'
-import { Link } from '@/components/link'
+import { Card } from '@/components/atoms/card'
+import { InputTextIcon, InputPasswordIcon } from '@/components/atoms/form/input'
+import { Button } from '@/components/atoms/form/button'
+import { Checkbox } from '@/components/atoms/form/checkbox'
+import { Link } from '@/components/atoms/link'
 
 
 function LoginTemplateSample() {
     return (
         <MainWrapper>
-            <Wrapper>
+            {/* <Wrapper>
                 <Image src='/assets/static/brand.png' width={150} height={150} alt='brand-image' priority />
-                <InputTextIcon icon='bx bx-user' placeholder='username' className='mb-4' />
-                <InputPasswordIcon icon='bx bx-lock-alt' placeholder='password' className='mb-4' />
-                <ActionWrapper>
+                <InputTextIcon icon='bx bx-user' placeholder='username' className='mb-3' />
+                <InputPasswordIcon icon='bx bx-lock-alt' placeholder='password' className='mb-3' />
+                <ActionWrapper className='mb-5'>
                     <Checkbox text='Remmember Me' />
-                    <Link to='#' text='Forgot Password?' className='font-bold'/>
-                    {/* <Button>Login</Button> */}
-                </ActionWrapper>
+                    <ForgotPassword to='#' text='Forgot Password?' />
 
-            </Wrapper>
+                </ActionWrapper>
+                <Button className='w-full'>Login</Button>
+
+            </Wrapper> */}
         </MainWrapper>
     )
 }
@@ -55,4 +56,8 @@ const ActionWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
+`
+
+const ForgotPassword = styled(Link)`
+    font-weight: 500;
 `
