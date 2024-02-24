@@ -5,7 +5,7 @@ import { useNavbar } from './hooks'
 
 function DashboardTemplateSample() {
     const dispatch = useAppDispatch()
-    useNavbar(dispatch, 'Dashboard')
+    useNavbar(dispatch, 'Dashboard', 'Welcome to Yousee dashboard')
 
     return (
         <Layout>

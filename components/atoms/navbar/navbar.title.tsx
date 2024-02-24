@@ -17,6 +17,5 @@ const StyledNavbarTitle = styled.h1`
     font-size: 1.75em;
     font-weight: 500;
     color: ${ColorScheme.textDark};
-    margin-bottom: 0;
-    line-height: 1;
+    margin-bottom: 0.5rem;
 `

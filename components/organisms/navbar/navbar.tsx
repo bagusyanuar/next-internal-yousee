@@ -14,7 +14,7 @@ const Navbar: React.FC<IProps> = ({ className = '' }) => {
     const StateNavbar = useAppSelector(NavbarState)
     return (
         <Wrapper className={className}>
-            <NavbarTitles title={StateNavbar.Title} />
+            <NavbarTitles title={StateNavbar.Title} subTitle={StateNavbar.SubTitle} />
         </Wrapper>
     )
 }

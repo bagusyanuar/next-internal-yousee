@@ -7,9 +7,9 @@ import {
 
 
 
-function useNavbar(dispatch: AppDispatch, title: string) {
-    console.log(title);
+function useNavbar(dispatch: AppDispatch, title: string, subTitle: string) {
     dispatch(SetTitle(title))
+    dispatch(SetSubTitle(subTitle))
 }
 
 export {
