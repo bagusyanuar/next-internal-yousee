@@ -14,6 +14,11 @@ export const ColorScheme = {
         shades20: 'color-mix(in srgb, black 20%, var(--light-color))'
     },
     textDark: 'var(--dark-color)',
+    textDarkTint: {
+        tint20: 'color-mix(in srgb, white 20%, var(--dark-color))',
+        tint80: 'color-mix(in srgb, white 80%, var(--dark-color))',
+        tint90: 'color-mix(in srgb, white 90%, var(--dark-color))',
+    }
 }
 
 export const CardPadding = {
@@ -45,3 +50,15 @@ export const ButtonPadding = {
 }
 
 export const SidebarWidth = '280px';
+
+export type TPageTitle= {
+    title: string
+    subTitle: string
+    withBackButton: boolean
+}
+
+export type TProfile = {
+    image: string
+    user: string
+    role: string
+}

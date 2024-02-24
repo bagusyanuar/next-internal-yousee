@@ -1,20 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
-import { NavbarTitles } from '@/components/molecules/navbar'
-
-import { useAppSelector } from '@/redux/hooks'
-import {
-    NavbarState,
-} from '@/redux/navbar/slice'
+import { NavbarTitles, NavbarMenus } from '@/components/molecules/navbar'
+import { TPageTitle, TProfile } from '@/components/utils'
 
 interface IProps {
+    pageTitle: TPageTitle
+    userProfile: TProfile
+    notification: number
     className?: string
+
 }
-const Navbar: React.FC<IProps> = ({ className = '' }) => {
-    const StateNavbar = useAppSelector(NavbarState)
+const Navbar: React.FC<IProps> = ({
+    pageTitle,
+    userProfile,
+    notification,
+    className = ''
+}) => {
     return (
         <Wrapper className={className}>
-            <NavbarTitles title={StateNavbar.Title} subTitle={StateNavbar.SubTitle} />
+            <NavbarTitles title={pageTitle.title} subTitle={pageTitle.subTitle} />
+            <NavbarMenus userProfile={userProfile} notification={notification} />
         </Wrapper>
     )
 }

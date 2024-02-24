@@ -1,19 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ColorScheme, SidebarWidth } from '@/components/utils'
+import { ColorScheme, SidebarWidth, TPageTitle, TProfile } from '@/components/utils'
 import { Sidebar } from '@/components/organisms/sidebar'
 import { Navbar } from '@/components/organisms/navbar'
 
 interface IProps {
     children?: React.ReactNode
     className?: string
+    pageTitle: TPageTitle
+    userProfile: TProfile
+    notification: number
 }
-const Layout: React.FC<IProps> = ({ children, className = '' }) => {
+const Layout: React.FC<IProps> = ({
+    children,
+    pageTitle,
+    userProfile,
+    notification,
+      className = ''
+}) => {
     return (
         <Wrapper className={className}>
             <Sidebar />
             <ContentWrapper>
-                <Navbar />
+                <Navbar pageTitle={pageTitle} userProfile={userProfile} notification={notification} />
                 {children}
             </ContentWrapper>
         </Wrapper>

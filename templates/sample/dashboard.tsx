@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect } from 'react'
 import { Layout } from '@/components/organisms/layout'
-import { useAppDispatch } from '@/redux/hooks'
-import { useNavbar } from './hooks'
+import { TPageTitle, TProfile } from '@/components/utils'
+import { CardStream } from '@/components/atoms/card'
 
-function DashboardTemplateSample() {
-    const dispatch = useAppDispatch()
-    useNavbar(dispatch, 'Dashboard', 'Welcome to Yousee dashboard')
-
+interface IProps { pageTitle: TPageTitle, userProfile: TProfile }
+function DashboardTemplateSample({ pageTitle, userProfile }: IProps) {
     return (
-        <Layout>
+        <Layout pageTitle={pageTitle} userProfile={userProfile} notification={1}>
+            <CardStream onStream>
 
+            </CardStream>
         </Layout>
     )
 }
