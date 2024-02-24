@@ -44,4 +44,4 @@ export const ButtonPadding = {
     medium: '0.75rem 2.5rem'
 }
 
-export const SidebarWidth = '260px';
+export const SidebarWidth = '280px';

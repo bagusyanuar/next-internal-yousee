@@ -3,13 +3,15 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import { SidebarWidth } from '@/components/utils'
 import { SidebarBrand } from '@/components/atoms/sidebar'
+import { SidebarItems } from '@/components/molecules/sidebar'
 
 interface IProps { className?: string }
 const Sidebar: React.FC<IProps> = ({ className = '' }) => {
     return (
-        <Wrapper>
+        <Wrapper className={className}>
             <SidebarContainer>
                 <SidebarBrand image='/assets/static/brand.png' />
+                <SidebarItems />
             </SidebarContainer>
         </Wrapper>
     )
@@ -23,12 +25,12 @@ const Wrapper = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    padding: 0.5rem 0.5rem;
+    padding: 1rem 1rem;
 `
 
 const SidebarContainer = styled.div`
     width: 100%;
-    height: calc(100vh - 1rem);
+    height: calc(100vh - 2rem);
     display: flex;
     flex-direction: column;
     border-radius: 10px;
