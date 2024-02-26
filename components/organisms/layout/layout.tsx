@@ -16,13 +16,18 @@ const Layout: React.FC<IProps> = ({
     pageTitle,
     userProfile,
     notification,
-      className = ''
+    className = ''
 }) => {
     return (
         <Wrapper className={className}>
             <Sidebar />
             <ContentWrapper>
-                <Navbar pageTitle={pageTitle} userProfile={userProfile} notification={notification} />
+                <Navbar
+                    pageTitle={pageTitle}
+                    userProfile={userProfile}
+                    notification={notification}
+                    className='mb-3'
+                />
                 {children}
             </ContentWrapper>
         </Wrapper>
