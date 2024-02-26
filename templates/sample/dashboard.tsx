@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { Layout } from '@/components/organisms/layout'
-import { CardInformations } from '@/components/organisms/dashboard'
+import { CardInformations, CardCategories, ProjectTable } from '@/components/organisms/dashboard'
 import { TPageTitle, TProfile } from '@/components/utils'
 import styled from 'styled-components'
 
@@ -14,7 +14,12 @@ function DashboardTemplateSample({ pageTitle, userProfile }: IProps) {
         >
             <CardInformations className='mb-5' />
             <SecondSectionWrapper>
-                <TableProjectWrapper></TableProjectWrapper>
+                <TableProjectWrapper>
+                    <ProjectTable />
+                </TableProjectWrapper>
+                <InformationWrapper>
+                    <CardCategories />
+                </InformationWrapper>
             </SecondSectionWrapper>
         </Layout>
     )
@@ -33,5 +38,10 @@ const TableProjectWrapper = styled.div`
     width: 100%;
     grid-column: 1 / span 3;
     min-height: 100px;
-    background-color: rebeccapurple;
+    /* background-color: rebeccapurple; */
+`
+
+const InformationWrapper = styled.div`
+    width: 100%;
+    display: flex;
 `
