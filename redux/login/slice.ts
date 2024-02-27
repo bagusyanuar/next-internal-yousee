@@ -13,13 +13,17 @@ const slice = createSlice({
         SetPassword: (state, action: PayloadAction<string>) => {
             state.Password = action.payload
         },
+        SetRememberMe: (state, action: PayloadAction<boolean>) => {
+            state.RememberMe = action.payload
+        },
     }
 })
 
 export const {
     Reset,
     SetUsername,
-    SetPassword
+    SetPassword,
+    SetRememberMe
 } = slice.actions
 
 export const LoginState = (state: RootState) => state.login

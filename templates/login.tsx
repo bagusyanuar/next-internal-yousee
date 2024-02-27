@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/utils'
-import { LoginFormMolecule as FormLogin } from '@/components/molecules/login'
+import { FormLogin } from '@/components/molecules/login'
 
 function LoginTemplate() {
   return (
