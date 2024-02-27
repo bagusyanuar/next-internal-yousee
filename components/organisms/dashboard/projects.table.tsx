@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from '@/components/atoms/card'
 import styled from 'styled-components'
 import { CardPadding, ColorScheme } from '@/components/utils'
-import { Table, TableHeader, TableRowBody, TableRowData } from '@/components/atoms/table'
+import { Table, TableHeader, TableRowBody, TableRowData, TR, TD } from '@/components/atoms/table'
 
 interface IProps { className?: string }
 const ProjectTable: React.FC<IProps> = ({ className = '' }) => {
@@ -14,17 +14,17 @@ const ProjectTable: React.FC<IProps> = ({ className = '' }) => {
             <Table>
                 <TableHeader
                     headers={[
-                        {name: '#', width: '2rem', align: 'center'},
-                        {name: 'Name', align: 'left'},
-                        {name: 'Client', align: 'center', width: '6rem'},
-                        {name: 'Status', align: 'center', width: '4rem'},
+                        { name: '#', width: '2rem', align: 'center' },
+                        { name: 'Name', align: 'left' },
+                        { name: 'Client', align: 'center', width: '6rem' },
+                        { name: 'Status', align: 'center', width: '4rem' },
                     ]}
                 />
                 <tbody>
-                    <TableRowBody>
-                        <TableRowData>1</TableRowData>
-                        <TableRowData>Project Advertising Colum 1</TableRowData>
-                    </TableRowBody>
+                    <TR>
+                        <TD>1</TD>
+                        <TD>Project Advertising Colum 1</TD>
+                    </TR>
                 </tbody>
             </Table>
         </Wrapper>
