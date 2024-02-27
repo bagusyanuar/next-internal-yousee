@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from '@/components/atoms/card'
 import styled from 'styled-components'
 import { CardPadding, ColorScheme } from '@/components/utils'
-import { Table, TableHeader } from '@/components/atoms/table'
+import { Table, TableHeader, TableRowBody, TableRowData } from '@/components/atoms/table'
 
 interface IProps { className?: string }
 const ProjectTable: React.FC<IProps> = ({ className = '' }) => {
@@ -20,6 +20,12 @@ const ProjectTable: React.FC<IProps> = ({ className = '' }) => {
                         {name: 'Status', align: 'center', width: '4rem'},
                     ]}
                 />
+                <tbody>
+                    <TableRowBody>
+                        <TableRowData>1</TableRowData>
+                        <TableRowData>Project Advertising Colum 1</TableRowData>
+                    </TableRowBody>
+                </tbody>
             </Table>
         </Wrapper>
     )

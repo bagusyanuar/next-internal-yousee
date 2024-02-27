@@ -1,5 +1,7 @@
 import Table from './table'
 import TableHeader from './table.header'
+import TableRowBody from './table.row.body'
+import TableRowData from './table.row.data'
 
 export type THeader = {
     name: string
@@ -9,5 +11,7 @@ export type THeader = {
 
 export {
     Table,
-    TableHeader
+    TableHeader,
+    TableRowBody,
+    TableRowData
 }
