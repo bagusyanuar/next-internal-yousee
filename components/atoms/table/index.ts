@@ -3,6 +3,8 @@ import TableHeader from './table.header'
 
 export type THeader = {
     name: string
+    width?: string
+    align?: 'left' | 'center' | 'right'
 }
 
 export {

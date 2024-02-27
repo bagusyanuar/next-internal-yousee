@@ -10,11 +10,14 @@ const ProjectTable: React.FC<IProps> = ({ className = '' }) => {
         <Wrapper className={className}>
             <HeadingTitle>Data Projects</HeadingTitle>
             <HeadingSubTitle>Recently Added Projects</HeadingSubTitle>
+            <hr className='mb-3 mt-3' />
             <Table>
                 <TableHeader
                     headers={[
-                        {name: '#'},
-                        {name: 'Name'}
+                        {name: '#', width: '2rem', align: 'center'},
+                        {name: 'Name', align: 'left'},
+                        {name: 'Client', align: 'center', width: '6rem'},
+                        {name: 'Status', align: 'center', width: '4rem'},
                     ]}
                 />
             </Table>
