@@ -8,13 +8,15 @@ import {
 } from '@/components/atoms/form/input'
 import { Checkbox } from '@/components/atoms/form/checkbox'
 import { Link } from '@/components/atoms/link'
+import { ButtonLoading } from '@/components/atoms/form/button'
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import {
     LoginState,
     SetUsername,
     SetPassword,
-    SetRememberMe
+    SetRememberMe,
+    SetLoadingLogin
 } from '@/redux/login/slice'
 
 interface IProps { className?: string }
@@ -52,6 +54,15 @@ const FormLogin: React.FC<IProps> = ({ className = '' }) => {
                 />
                 <ForgotPassword to='#' text='Forgot Password?' />
             </div>
+            <ButtonLoading
+                onLoading={StateLogin.LoadingLogin}
+                onClick={() => {
+                    dispatch(SetLoadingLogin(true))
+                }}
+                className='btn-login'
+            >
+                <span>Login</span>
+            </ButtonLoading>
         </Wrapper>
     )
 }
@@ -76,7 +87,11 @@ const Wrapper = styled(Card)`
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-login {
+        width: 100%;
     }
 `
 

@@ -16,6 +16,10 @@ const slice = createSlice({
         SetRememberMe: (state, action: PayloadAction<boolean>) => {
             state.RememberMe = action.payload
         },
+        SetLoadingLogin: (state, action: PayloadAction<boolean>) => {
+            state.LoadingLogin = action.payload
+        },
+
     }
 })
 
@@ -23,7 +27,8 @@ export const {
     Reset,
     SetUsername,
     SetPassword,
-    SetRememberMe
+    SetRememberMe,
+    SetLoadingLogin
 } = slice.actions
 
 export const LoginState = (state: RootState) => state.login
