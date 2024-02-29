@@ -19,14 +19,31 @@ import {
     SetLoadingLogin
 } from '@/redux/login/slice'
 import { submit } from '@/redux/login/action'
-
+import { APIResponse } from '@/lib/jsonResponse'
+import { ToastSuccessLogin } from '@/components/atoms/toast'
+import { toast, Slide } from "react-toastify";
 
 
 interface IProps { className?: string }
 const FormLogin: React.FC<IProps> = ({ className = '' }) => {
     const StateLogin = useAppSelector(LoginState)
     const dispatch = useAppDispatch()
-    
+
+    const loginHandler = () => {
+        dispatch(submit()).then(response => {
+            const payload: APIResponse = response.payload as APIResponse
+            if (payload.code === 200) {
+                toast(ToastSuccessLogin({ text: 'abc' }), {
+                    position: 'top-right',
+                    onClose: () => { console.log('closed') },
+                    autoClose: 1000,
+                    transition: Slide,
+                    closeButton: false,
+                    className:'success-toast',
+                })
+            }
+        })
+    }
 
     return (
         <Wrapper className={className}>
@@ -60,14 +77,12 @@ const FormLogin: React.FC<IProps> = ({ className = '' }) => {
             </div>
             <ButtonLoading
                 onLoading={StateLogin.LoadingLogin}
-                onClick={() => {
-                    dispatch(submit())
-                }}
+                onClick={loginHandler}
                 className='btn-login'
             >
                 <span>Login</span>
             </ButtonLoading>
-            
+
         </Wrapper>
     )
 }

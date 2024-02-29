@@ -16,6 +16,11 @@
   --success-color: #004225;
 }
 
+.success-toast {
+  padding: 0 0 !important;
+  background-color: blue !important;
+  min-height: auto !important;
+}
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

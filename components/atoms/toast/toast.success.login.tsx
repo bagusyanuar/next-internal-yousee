@@ -1,8 +1,10 @@
 import React from 'react'
+import { ToastContentProps } from 'react-toastify'
 
-const ToastSuccessLogin = () => {
+interface IProps { text?: string }
+const ToastSuccessLogin = ({ closeToast, toastProps, text = '' }: Partial<ToastContentProps> & IProps) => {
   return (
-    <div>Successfully Login</div>
+    <div>{text}</div>
   )
 }
 

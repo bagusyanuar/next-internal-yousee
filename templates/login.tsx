@@ -11,18 +11,8 @@ function LoginTemplate() {
   return (
     <Wrapper>
       <FormLogin />
-      <ToastContainer
-        position="top-center"
-        autoClose={1000}
+      <ToastContainer 
         hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Slide}
       />
     </Wrapper>
   )
