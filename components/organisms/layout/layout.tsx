@@ -20,6 +20,7 @@ const Layout: React.FC<IProps> = ({
 }) => {
     return (
         <Wrapper className={className}>
+            
             <Sidebar />
             <ContentWrapper>
                 <Navbar
@@ -30,6 +31,7 @@ const Layout: React.FC<IProps> = ({
                 />
                 {children}
             </ContentWrapper>
+
         </Wrapper>
     )
 }

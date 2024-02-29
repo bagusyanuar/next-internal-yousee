@@ -18,11 +18,17 @@ import {
     SetRememberMe,
     SetLoadingLogin
 } from '@/redux/login/slice'
+import { submit } from '@/redux/login/action'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const notify = () => toast("Wow so easy !");
 
 interface IProps { className?: string }
 const FormLogin: React.FC<IProps> = ({ className = '' }) => {
     const StateLogin = useAppSelector(LoginState)
     const dispatch = useAppDispatch()
+    
 
     return (
         <Wrapper className={className}>
@@ -57,12 +63,14 @@ const FormLogin: React.FC<IProps> = ({ className = '' }) => {
             <ButtonLoading
                 onLoading={StateLogin.LoadingLogin}
                 onClick={() => {
-                    dispatch(SetLoadingLogin(true))
+                    // dispatch(submit())
+                    toast("Wow so easy !")
                 }}
                 className='btn-login'
             >
                 <span>Login</span>
             </ButtonLoading>
+            <ToastContainer />
         </Wrapper>
     )
 }
