@@ -3,8 +3,14 @@ import React from 'react'
 import { ToastContentProps } from 'react-toastify'
 import styled from 'styled-components'
 
-interface IProps { text?: string }
-const ToastSuccessLogin = ({ closeToast, toastProps, text = '' }: Partial<ToastContentProps> & IProps) => {
+interface IProps {
+  text?: string
+}
+const ToastSuccess: React.FC<Partial<ToastContentProps> & IProps> = ({
+  closeToast,
+  toastProps,
+  text = '',
+}) => {
   return (
     <Wrapper>
       <div className='spacer-color'></div>
@@ -16,18 +22,30 @@ const ToastSuccessLogin = ({ closeToast, toastProps, text = '' }: Partial<ToastC
           <span className='title'>Success</span>
           <span className='description'>{text}</span>
         </div>
+        <div className='close-button-wrapper'>
+          <a href='#' onClick={(e) => {
+            e.preventDefault();
+            if (closeToast) {
+              closeToast()
+            }
+          }}>
+            <i className='bx bx-x'></i>
+          </a>
+
+        </div>
       </div>
     </Wrapper>
   )
 }
 
-export default ToastSuccessLogin
+export default ToastSuccess
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   height: fit-content;
   min-height: 60px;
+  width: 100%;
 
   .spacer-color {
     height: 100%;
@@ -37,27 +55,52 @@ const Wrapper = styled.div`
     margin-right: 0.5rem;
   }
 
+  
+
   .content-wrapper {
     display: flex;
     align-items: start;
-
+    width: 100%;
+    
     .icon-wrapper {
-      height: 25px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 1rem;
-      margin-left: 0.75rem;
+      margin-left: 0.5rem;
 
       i {
         color: var(--success-color);
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
+    }
+
+    .close-button-wrapper {
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 1rem;
+      margin-right: 0.75rem;
+
+      a {
+        i {
+          color: ${ColorScheme.textLight};
+          font-size: 1.5rem;
+        }
+
+        &:hover {
+          color: ${ColorScheme.textLight};
+        }
+      }
+      
     }
 
     .notification-content {
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
 
       .title {
         font-weight: 600;

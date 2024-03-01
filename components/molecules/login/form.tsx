@@ -16,12 +16,10 @@ import {
     SetUsername,
     SetPassword,
     SetRememberMe,
-    SetLoadingLogin
 } from '@/redux/login/slice'
 import { submit } from '@/redux/login/action'
 import { APIResponse } from '@/lib/jsonResponse'
-import { TOAST } from '@/components/atoms/toast'
-import { toast, Slide } from "react-toastify";
+import { TOAST, ToastSuccess } from '@/components/atoms/toast'
 
 
 interface IProps { className?: string }
@@ -33,15 +31,7 @@ const FormLogin: React.FC<IProps> = ({ className = '' }) => {
         dispatch(submit()).then(response => {
             const payload: APIResponse = response.payload as APIResponse
             if (payload.code === 200) {
-                TOAST.success('successfully login');
-                // toast(ToastSuccessLogin({ text: 'abc' }), {
-                //     position: 'top-right',
-                //     onClose: () => { console.log('closed') },
-                //     autoClose: 1000,
-                //     transition: Slide,
-                //     closeButton: false,
-                //     className:'success-toast',
-                // })
+                TOAST(<ToastSuccess text='successfully login' />, { timeToClose: 2000 })
             }
         })
     }

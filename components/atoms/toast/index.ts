@@ -1,19 +1,35 @@
-import ToastSuccessLogin from './toast.success.login'
-import { toast, Slide } from "react-toastify";
-const TOAST = {
-    success: function (text: string, onClose?: () => void) {
-        toast(ToastSuccessLogin({ text },), {
-            position: 'top-right',
-            onClose: onClose,
-            autoClose: 1000,
-            transition: Slide,
-            closeButton: false,
-            className: 'success-toast',
-            bodyClassName: 'success-toast-body'
-        })
-    }
+import React from 'react'
+import ToastSuccess from './toast.success'
+import ToastInfo from './toast.info'
+import ToastWarning from './toast.warning'
+import ToastError from './toast.error'
+import { toast, Slide, Id } from "react-toastify";
+
+interface IPropsToast {
+
+    onClose?: () => void
+    timeToClose?: number | false
 }
+
+function TOAST(content: React.ReactNode, {
+    timeToClose,
+    onClose = () => { }
+}: IPropsToast) {
+    return toast(content, {
+        position: 'top-right',
+        autoClose: timeToClose,
+        transition: Slide,
+        closeButton: false,
+        className: 'custom-toast',
+        bodyClassName: 'custom-toast-body',
+        onClose
+    })
+}
+
 export {
-    ToastSuccessLogin,
-    TOAST
+    TOAST,
+    ToastSuccess,
+    ToastInfo,
+    ToastWarning,
+    ToastError
 }
