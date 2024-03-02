@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { usePathname } from 'next/navigation'
 import { NavbarTitle, NavbarSubTitle } from '@/components/atoms/navbar'
 
 interface IProps {
@@ -18,7 +19,7 @@ const NavbarTitles: React.FC<IProps> = ({
     return (
         <Wrapper className={className}>
             <NavbarTitle text={title} />
-            { subTitle ? <NavbarSubTitle text={subTitle} /> : <></> }
+            {subTitle ? <NavbarSubTitle text={subTitle} /> : <></>}
         </Wrapper>
     )
 }
