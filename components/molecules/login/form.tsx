@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { Card } from '@/components/atoms/card'
 import styled from 'styled-components'
 import {
@@ -20,18 +21,25 @@ import {
 import { submit } from '@/redux/login/action'
 import { APIResponse } from '@/lib/jsonResponse'
 import { TOAST, ToastSuccess } from '@/components/atoms/toast'
+import { PageRouter } from '@/lib/route'
 
 
 interface IProps { className?: string }
 const FormLogin: React.FC<IProps> = ({ className = '' }) => {
     const StateLogin = useAppSelector(LoginState)
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     const loginHandler = () => {
         dispatch(submit()).then(response => {
             const payload: APIResponse = response.payload as APIResponse
             if (payload.code === 200) {
-                TOAST(<ToastSuccess text='successfully login' />, { timeToClose: 2000 })
+                TOAST(<ToastSuccess text='successfully login' />, {
+                    timeToClose: 2000,
+                    onClose: () => {
+                        router.push(PageRouter.Dashboard)
+                    }
+                })
             }
         })
     }
