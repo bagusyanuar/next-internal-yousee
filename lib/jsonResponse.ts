@@ -10,6 +10,19 @@ type TResponse = {
     data?: any
     meta?: any
 }
+export const JSONResponse = (code: number, {
+    message = 'success',
+    data = null,
+    meta = null
+}: TResponse): Response => {
+    let jsonBody: APIResponse = {
+        code: code,
+        message,
+        data,
+        meta
+    }
+    return Response.json(jsonBody, { status: code })
+}
 export const JSONSuccessResponse = ({
     message = 'success',
     data = null,

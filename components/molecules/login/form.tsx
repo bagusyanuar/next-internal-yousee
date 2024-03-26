@@ -20,7 +20,7 @@ import {
 } from '@/redux/login/slice'
 import { submit } from '@/redux/login/action'
 import { APIResponse } from '@/lib/jsonResponse'
-import { TOAST, ToastSuccess } from '@/components/atoms/toast'
+import { TOAST, ToastError, ToastSuccess } from '@/components/atoms/toast'
 import { PageRouter } from '@/lib/route'
 
 
@@ -33,13 +33,26 @@ const FormLogin: React.FC<IProps> = ({ className = '' }) => {
     const loginHandler = () => {
         dispatch(submit()).then(response => {
             const payload: APIResponse = response.payload as APIResponse
+            switch (payload.code) {
+                case 200:
+                    TOAST(<ToastSuccess text={payload.message} />, {
+                        timeToClose: 2000,
+                        onClose: () => {
+                            // router.push(PageRouter.Dashboard)
+                        }
+                    })
+                    break;
+                default:
+                    TOAST(<ToastError text={payload.message} />, {
+                        timeToClose: 2000,
+                        onClose: () => {
+                            // router.push(PageRouter.Dashboard)
+                        }
+                    })
+                    break;
+            }
             if (payload.code === 200) {
-                TOAST(<ToastSuccess text='successfully login' />, {
-                    timeToClose: 2000,
-                    onClose: () => {
-                        router.push(PageRouter.Dashboard)
-                    }
-                })
+                
             }
         })
     }
