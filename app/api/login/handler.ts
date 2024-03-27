@@ -47,6 +47,7 @@ export const LoginHandler = async (request: Request): Promise<Response> => {
             role: decodedToken.role
         }
         session.token = data.access_token
+        session.cookieUser = cookieAuth
         session.user = sessionUser
         await session.save()
         return JSONSuccessResponse({ message: message })
