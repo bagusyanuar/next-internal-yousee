@@ -6,7 +6,7 @@ import { Card } from '@/components/atoms/card'
 import styled from 'styled-components'
 import { SectionTitle } from '@/components/atoms/typography'
 import { ButtonADD } from '@/components/atoms/form/button'
-import Table, { TR, TH } from '@/components/atoms/table'
+import { CategoriesTable } from '@/components/molecules/pages/categories'
 
 function CategoriesTemplate() {
 
@@ -21,16 +21,7 @@ function CategoriesTemplate() {
                     <ButtonADD onClick={() => { }} />
                 </div>
                 <hr />
-                <Table>
-                    <thead>
-                        <TR>
-                            <TH width='4rem' align='center'>No.</TH>
-                            <TH width='8rem' align='center'>Icon</TH>
-                            <TH>Name</TH>
-                            <TH width='12rem' align='center'>Action</TH>
-                        </TR>
-                    </thead>
-                </Table>
+                <CategoriesTable />
             </Wrapper>
         </Layout>
     )
