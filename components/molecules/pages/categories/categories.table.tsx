@@ -1,5 +1,11 @@
-import { TH, TR } from '@/components/atoms/table'
+import { TH, TR, TD, TableLength } from '@/components/atoms/table'
 import React from 'react'
+import styled from 'styled-components'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import {
+    CategoriesState,
+    SetPerPage,
+} from '@/redux/categories/slice'
 
 interface IProps {
     className?: string
@@ -8,19 +14,39 @@ interface IProps {
 const CategoriesTable: React.FC<IProps> = ({
     className = ''
 }) => {
+    const StateCategories = useAppSelector(CategoriesState)
+    const dispatch = useAppDispatch()
     return (
-        <table className={`w-full ${className}`}>
-            <thead>
-                <TR>
-                    <TH width='4rem' align='center'>No.</TH>
-                    <TH width='8rem' align='center'>Icon</TH>
-                    <TH>Name</TH>
-                    <TH width='12rem' align='center'>Action</TH>
-                </TR>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <Wrapper className={className}>
+            <TableLength lengths={[10, 25, 50]} />
+            <TableWrapper>
+                <thead>
+                    <TR>
+                        <TH width='4rem' align='center'>No.</TH>
+                        <TH width='8rem' align='center'>Icon</TH>
+                        <TH>Name</TH>
+                        <TH width='12rem' align='center'>Action</TH>
+                    </TR>
+                </thead>
+                <tbody>
+                    <TR>
+                        <TD>No.</TD>
+                        <TD>icon</TD>
+                        <TD>Name</TD>
+                        <TD>Action</TD>
+                    </TR>
+                </tbody>
+            </TableWrapper>
+        </Wrapper>
     )
 }
 
 export default CategoriesTable
+
+const Wrapper = styled.div`
+    width: 100%;
+`
+
+const TableWrapper = styled.table`
+    width: 100%;
+`

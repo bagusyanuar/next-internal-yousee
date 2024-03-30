@@ -6,7 +6,7 @@ import { Card } from '@/components/atoms/card'
 import styled from 'styled-components'
 import { SectionTitle } from '@/components/atoms/typography'
 import { ButtonADD } from '@/components/atoms/form/button'
-import { CategoriesTable } from '@/components/molecules/pages/categories'
+import { CategoriesTable, CategoriesHeader } from '@/components/molecules/pages/categories'
 
 function CategoriesTemplate() {
 
@@ -16,11 +16,8 @@ function CategoriesTemplate() {
             userProfile={{ image: '/assets/static/avatar.png', user: 'username', role: 'superadmin' }}
         >
             <Wrapper>
-                <div className='flex items-center justify-between'>
-                    <SectionTitle text='Categories Data' />
-                    <ButtonADD onClick={() => { }} />
-                </div>
-                <hr />
+                <CategoriesHeader />
+                <hr className='mb-4'/>
                 <CategoriesTable />
             </Wrapper>
         </Layout>

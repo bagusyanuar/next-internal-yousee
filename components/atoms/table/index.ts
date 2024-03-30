@@ -1,4 +1,5 @@
 import Table, { TD, TR, TH } from './table'
+import TableLength from './table.length'
 export default Table
 // import TR from './tr'
 // import TD from './td'
@@ -16,4 +17,5 @@ export {
     TR,
     TD,
     TH,
+    TableLength,
 }
