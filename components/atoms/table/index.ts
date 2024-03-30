@@ -1,5 +1,6 @@
 import Table, { TD, TR, TH } from './table'
 import TableLength from './table.length'
+import TablePagination from './table.pagination'
 export default Table
 // import TR from './tr'
 // import TD from './td'
@@ -18,4 +19,5 @@ export {
     TD,
     TH,
     TableLength,
+    TablePagination,
 }

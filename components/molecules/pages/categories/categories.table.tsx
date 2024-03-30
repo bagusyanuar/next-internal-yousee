@@ -1,4 +1,4 @@
-import { TH, TR, TD, TableLength } from '@/components/atoms/table'
+import { TH, TR, TD, TableLength, TablePagination } from '@/components/atoms/table'
 import React from 'react'
 import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
@@ -16,9 +16,18 @@ const CategoriesTable: React.FC<IProps> = ({
 }) => {
     const StateCategories = useAppSelector(CategoriesState)
     const dispatch = useAppDispatch()
+
+    const handleChangePerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const perPage: number = parseInt(e.currentTarget.value)
+        dispatch(SetPerPage(perPage))
+    }
     return (
         <Wrapper className={className}>
-            <TableLength lengths={[10, 25, 50]} />
+            <TableLength
+                lengths={StateCategories.Pagination.PageLength}
+                value={StateCategories.Pagination.PerPage}
+                onChange={handleChangePerPage}
+            />
             <TableWrapper>
                 <thead>
                     <TR>
@@ -37,6 +46,7 @@ const CategoriesTable: React.FC<IProps> = ({
                     </TR>
                 </tbody>
             </TableWrapper>
+            <TablePagination page={2} totalPage={5} totalRows={120} />
         </Wrapper>
     )
 }

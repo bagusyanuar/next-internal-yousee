@@ -4,9 +4,11 @@ import styled from 'styled-components'
 
 interface IProps {
     lengths: Array<number>
+    value: number
     onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 const TableLength: React.FC<IProps> = ({
+    value,
     lengths,
     onChange
 }) => {
@@ -17,7 +19,7 @@ const TableLength: React.FC<IProps> = ({
                 {
                     lengths.map((v, i) => {
                         return (
-                            <option key={i} value={v}>{v}</option>
+                            <option key={i} value={v} selected={v === value}>{v}</option>
                         )
                     })
                 }
