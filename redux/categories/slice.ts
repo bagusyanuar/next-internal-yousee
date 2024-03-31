@@ -10,12 +10,16 @@ const slice = createSlice({
         SetPerPage: (state, action: PayloadAction<number>) => {
             state.Pagination.PerPage = action.payload
         },
+        SetPage: (state, action: PayloadAction<number>) => {
+            state.Pagination.Page = action.payload
+        },
     }
 })
 
 export const {
     Reset,
-    SetPerPage
+    SetPerPage,
+    SetPage
 } = slice.actions
 
 export const CategoriesState = (state: RootState) => state.categories

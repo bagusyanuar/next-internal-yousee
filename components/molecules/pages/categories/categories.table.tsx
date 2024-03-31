@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import {
     CategoriesState,
     SetPerPage,
+    SetPage
 } from '@/redux/categories/slice'
 
 interface IProps {
@@ -21,6 +22,11 @@ const CategoriesTable: React.FC<IProps> = ({
         const perPage: number = parseInt(e.currentTarget.value)
         dispatch(SetPerPage(perPage))
     }
+    
+    const handleChangePage = (page: number) => {
+        dispatch(SetPage(page))
+    }
+
     return (
         <Wrapper className={className}>
             <TableLength
@@ -46,7 +52,12 @@ const CategoriesTable: React.FC<IProps> = ({
                     </TR>
                 </tbody>
             </TableWrapper>
-            <TablePagination page={2} totalPage={5} totalRows={120} />
+            <TablePagination
+                page={StateCategories.Pagination.Page}
+                totalPage={3}
+                totalRows={120}
+                onPageChange={handleChangePage}
+            />
         </Wrapper>
     )
 }

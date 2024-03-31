@@ -6,22 +6,81 @@ interface IProps {
     page: number
     totalPage: number
     totalRows: number
+    onPageChange: (page: number) => void
 }
 
 const TablePagination: React.FC<IProps> = ({
     page,
     totalPage,
-    totalRows
+    totalRows,
+    onPageChange
 }) => {
     const [pages, setPages] = useState<Array<number>>([])
 
     useEffect(() => {
         const arrayPages: Array<number> = Array.from({ length: totalPage }, (v, k) => (k + 1))
-        setPages(arrayPages);
+        const indexOfCurrentPage: number = arrayPages.indexOf(page) + 1
+        const startIndex: number = indexOfCurrentPage - 2
+        const endIndex: number = indexOfCurrentPage + 3
+        let shownPages: Array<number> = []
+        for (let index = startIndex; index < endIndex; index++) {
+            shownPages.push(index)
+        }
+
+        if (shownPages[0] < 1) {
+            shownPages = arrayPages.slice(0, 5)
+        }
+
+        if (shownPages[4] > arrayPages.length) {
+            if (arrayPages.length < 5) {
+                shownPages = arrayPages
+            } else {
+                shownPages = arrayPages.slice(arrayPages.length - 5, arrayPages.length)
+            }
+        }
+
+        setPages(shownPages);
         return () => {
             setPages([])
         }
-    }, [totalPage])
+    }, [page, totalPage])
+
+
+    const handlePageChange = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.preventDefault()
+        if (e.currentTarget.dataset.index) {
+            switch (e.currentTarget.dataset.index) {
+                case 'first':
+                    onPageChange(1)
+                    break;
+                case 'previous':
+                    if (page > 1) {
+                        const p: number = page - 1
+                        onPageChange(p)
+                    }
+                    break;
+                case 'page':
+                    if (e.currentTarget.dataset.page) {
+                        const dataPage: number = parseInt(e.currentTarget.dataset.page)
+                        onPageChange(dataPage)
+                    }
+                    break;
+                case 'next':
+                    if (page < totalPage) {
+                        const p: number = page + 1
+                        onPageChange(p)
+                    }
+                    break;
+                case 'last':
+                    onPageChange(totalPage)
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
 
 
     return (
@@ -31,31 +90,31 @@ const TablePagination: React.FC<IProps> = ({
             </Information>
             <PageSelect className='-space-x-px'>
                 <li>
-                    <a href='#' className='page-select-item first'>
+                    <a href='#' onClick={handlePageChange} data-index="first" className='page-select-item first'>
                         <i className='bx bx-chevrons-left'></i>
                     </a>
                 </li>
                 <li>
-                    <a href='#' className='page-select-item'>
+                    <a href='#' onClick={handlePageChange} data-index="previous" className='page-select-item'>
                         <i className='bx bx-chevron-left'></i>
                     </a>
                 </li>
                 {
                     pages.map((v, k) => {
                         return <li key={k}>
-                            <a href='#' className={`page-select-item ${page === v ? 'selected' : ''}`}>
+                            <a href='#' onClick={handlePageChange} data-index="page" data-page={v} className={`page-select-item ${page === v ? 'selected' : ''}`}>
                                 {v}
                             </a>
                         </li>
                     })
                 }
                 <li>
-                    <a href='#' className='page-select-item'>
+                    <a href='#' onClick={handlePageChange} data-index="next" className='page-select-item'>
                         <i className='bx bx-chevron-right'></i>
                     </a>
                 </li>
                 <li>
-                    <a href='#' className='page-select-item last'>
+                    <a href='#' onClick={handlePageChange} data-index="last" className='page-select-item last'>
                         <i className='bx bx-chevrons-right'></i>
                     </a>
                 </li>

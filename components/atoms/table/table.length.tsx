@@ -15,11 +15,11 @@ const TableLength: React.FC<IProps> = ({
     return (
         <Wrapper>
             <span className='me-2'>Show :</span>
-            <select onChange={onChange}>
+            <select onChange={onChange} defaultValue={value}>
                 {
                     lengths.map((v, i) => {
                         return (
-                            <option key={i} value={v} selected={v === value}>{v}</option>
+                            <option key={i} value={v}>{v}</option>
                         )
                     })
                 }
