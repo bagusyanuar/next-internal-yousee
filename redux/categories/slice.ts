@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/redux/store'
 import initialState from './state'
+import eventReducers from './events'
 
 const slice = createSlice({
     name: 'categories',
@@ -13,7 +14,8 @@ const slice = createSlice({
         SetPage: (state, action: PayloadAction<number>) => {
             state.Pagination.Page = action.payload
         },
-    }
+    },
+    extraReducers: eventReducers,
 })
 
 export const {

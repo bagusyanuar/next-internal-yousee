@@ -34,6 +34,7 @@ export default TableLength
 const Wrapper = styled.div`
     display: flex;
     align-items: center;
+    margin-bottom: 0.75rem;
 
     span {
         font-size: 0.8em;

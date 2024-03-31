@@ -5,5 +5,6 @@ export const PageRouter = {
 }
 
 export const InternalAPI = {
-    login: `${internalAPIPrefix}/login`
+    login: `${internalAPIPrefix}/login`,
+    getCategories: `${internalAPIPrefix}/category`
 }

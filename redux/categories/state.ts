@@ -1,3 +1,5 @@
+import { Category } from "@/model/category";
+
 type TPagination = {
     PageLength: Array<number>
     PerPage: number
@@ -6,6 +8,7 @@ type TPagination = {
 
 export type TState = {
     Pagination: TPagination
+    Categories: Array<Category>
 }
 
 const initialState: TState = {
@@ -13,7 +16,8 @@ const initialState: TState = {
         PageLength: [10, 25, 50],
         PerPage: 10,
         Page: 1
-    }
+    },
+    Categories: []
 }
 
 export default initialState

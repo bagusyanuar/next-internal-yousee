@@ -42,7 +42,7 @@ export const TR: React.FC<ITRProps> = ({
 
 const StyledTR = styled.tr`
     width: 100%;
-    border-bottom: 1px solid ${ColorScheme.textDarkTint.tint80};
+    /* border-bottom: 1px solid ${ColorScheme.textDarkTint.tint80}; */
 `
 
 interface ITHProps {
@@ -50,6 +50,10 @@ interface ITHProps {
     className?: string
     width?: string
     align?: 'left' | 'center' | 'right'
+    // sort?: {
+    //     active: boolean
+    //     key: string
+    // }
 }
 
 export const TH: React.FC<ITHProps> = ({
@@ -64,7 +68,10 @@ export const TH: React.FC<ITHProps> = ({
             className={className}
         >
             <StyledTHContent $align={align}>
-                {children}
+                <span>{children}</span>
+                {/* <a href='#'>
+                    <i className='bx bx-sort-alt-2'></i>
+                </a> */}
             </StyledTHContent>
         </StyledTH>
     )
@@ -85,32 +92,49 @@ type TTHContentProps = {
 }
 
 const StyledTHContent = styled.div<TTHContentProps>`
-    width: 100%;
-    text-align: ${({ $align }) => $align ? $align : 'left'};
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+        width: 100%;
+        text-align: ${({ $align }) => $align ? $align : 'left'};
+        padding: 0.5rem 0.75rem;
+    }
 `
 
 interface ITDProps {
     children: React.ReactNode
     className?: string
+    align?: 'left' | 'center' | 'right'
 }
 
 export const TD: React.FC<ITDProps> = ({
     children,
-    className = ''
+    className = '',
+    align = 'left'
 }) => {
     return (
         <StyledTD className={className}>
-            {children}
+            <StyledTDContent $align={align}>
+                {children}
+            </StyledTDContent>
         </StyledTD>
     )
 }
 
 const StyledTD = styled.td`
-    padding: 1rem 1rem;
+    /* padding: 0.5rem 0.5rem; */
     font-size: 0.8em;
-    color: ${ColorScheme.textLightShades.shades20};
+    color: ${ColorScheme.textDark};
+    border-bottom: 1px solid ${ColorScheme.textDarkTint.tint80};
+`
+type TTDContentProps = {
+    $align?: 'left' | 'center' | 'right'
+}
+
+const StyledTDContent = styled.div<TTDContentProps>`
+    width: 100%;
+    text-align: ${({ $align }) => $align ? $align : 'left'};
+    padding: 0.5rem 0.75rem;
 `

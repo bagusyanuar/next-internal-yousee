@@ -15,7 +15,9 @@ export const AxiosServer: AxiosInstance = axios.create({
 
 export const WithAuthRoute = async (handler: Promise<Response>): Promise<Response> => {
     const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+    AxiosServer.defaults.headers.common["Content-Type"] = 'application/json'
     AxiosServer.defaults.headers.common.Authorization = `Bearer ${session.token}`
     AxiosServer.defaults.headers.common['Cookie'] = session.cookieUser
-    return handler
+    console.log(AxiosServer.defaults.headers.common);
+    return await handler
 }

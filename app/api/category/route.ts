@@ -5,11 +5,13 @@ import { transformToCategories } from "@/model/transform/category"
 import axios, { AxiosError, AxiosResponse } from "axios"
 
 export async function GET(request: Request) {
+    console.log(AxiosServer.defaults.headers.common);
     return await WithAuthRoute(GetCategoryHandler(request))
 }
 
 const prefix = '/media-type'
 const GetCategoryHandler = async (request: Request): Promise<Response> => {
+    
     try {
         const queryURL = new URL(request.url)
         const searchParam = new URLSearchParams(queryURL.searchParams)
@@ -22,16 +24,18 @@ const GetCategoryHandler = async (request: Request): Promise<Response> => {
         const message: string = response?.data.message
         const meta: any = response?.data.meta
         const data: Array<any> = response?.data.data as Array<any> ?? []
-        const categories: Array<Category> = transformToCategories(data)
 
-        return JSONSuccessResponse({ message: message, data: categories, meta: meta })
+        return JSONSuccessResponse({ message: message, data: data, meta: meta })
     } catch (error: any | AxiosError) {
+        
+        
         let code: number = 500
         let message: string = 'internal server error'
         if (axios.isAxiosError(error)) {
             code = error.response ? error.response?.status : 500
             message = error.response ? error.response.data.message : 'internal server error'
-            console.log(error.response?.data)
+            // console.log(error.request);
+            
         }
         return JSONResponse(code, { message: message })
     }
