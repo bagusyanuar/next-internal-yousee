@@ -14,6 +14,10 @@ const slice = createSlice({
         SetPage: (state, action: PayloadAction<number>) => {
             state.Pagination.Page = action.payload
         },
+        SetQuery: (state, action: PayloadAction<string>) => {
+            state.Query = action.payload
+        },
+        
     },
     extraReducers: eventReducers,
 })
@@ -21,7 +25,8 @@ const slice = createSlice({
 export const {
     Reset,
     SetPerPage,
-    SetPage
+    SetPage,
+    SetQuery
 } = slice.actions
 
 export const CategoriesState = (state: RootState) => state.categories

@@ -28,6 +28,7 @@ export default CategoriesTemplate
 
 const Wrapper = styled(Card)`
     width: 100%;
+    padding: 1.5rem 2rem;
 `
 
 

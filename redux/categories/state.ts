@@ -8,6 +8,7 @@ type TPagination = {
 
 export type TState = {
     Pagination: TPagination
+    Query: string
     Categories: Array<Category>
 }
 
@@ -17,6 +18,7 @@ const initialState: TState = {
         PerPage: 10,
         Page: 1
     },
+    Query: '',
     Categories: []
 }
 

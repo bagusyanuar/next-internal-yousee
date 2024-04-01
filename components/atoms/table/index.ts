@@ -1,6 +1,7 @@
 import Table, { TD, TR, TH } from './table'
 import TableLength from './table.length'
 import TablePagination from './table.pagination'
+import TableSearchText from './table.search.text'
 export default Table
 // import TR from './tr'
 // import TD from './td'
@@ -20,4 +21,5 @@ export {
     TH,
     TableLength,
     TablePagination,
+    TableSearchText
 }

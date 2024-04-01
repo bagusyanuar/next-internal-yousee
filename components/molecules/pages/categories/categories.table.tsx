@@ -1,4 +1,4 @@
-import { TH, TR, TD, TableLength, TablePagination } from '@/components/atoms/table'
+import { TH, TR, TD, TableLength, TablePagination, TableSearchText } from '@/components/atoms/table'
 import React, { useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
@@ -6,7 +6,8 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import {
     CategoriesState,
     SetPerPage,
-    SetPage
+    SetPage,
+    SetQuery
 } from '@/redux/categories/slice'
 import { getCategoriesData } from '@/redux/categories/action'
 import { ColorScheme } from '@/components/utils'
@@ -30,6 +31,10 @@ const CategoriesTable: React.FC<IProps> = ({
         dispatch(SetPage(page))
     }
 
+    const handleChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(SetQuery(e.currentTarget.value))
+    }
+
     const initialPage = useCallback(() => {
         dispatch(getCategoriesData())
     }, [])
@@ -42,11 +47,23 @@ const CategoriesTable: React.FC<IProps> = ({
 
     return (
         <Wrapper className={className}>
-            <TableLength
-                lengths={StateCategories.Pagination.PageLength}
-                value={StateCategories.Pagination.PerPage}
-                onChange={handleChangePerPage}
-            />
+            <div className='flex items-center justify-between'>
+                <TableLength
+                    lengths={StateCategories.Pagination.PageLength}
+                    value={StateCategories.Pagination.PerPage}
+                    onChange={handleChangePerPage}
+                />
+                <div className='w-1/5'>
+                    <TableSearchText
+                        value={StateCategories.Query}
+                        onChange={handleChangeQuery}
+                        placeholder='search...'
+                        className='mb-3'
+                    />
+                </div>
+
+            </div>
+
             <TableWrapper>
                 <thead>
                     <TR>
