@@ -9,7 +9,6 @@ const onGetCategoriesBuilder = (builder: ActionReducerMapBuilder<TState>): Actio
         // state.LoadingLogin = true
     }).addCase(getCategoriesData.fulfilled, (state, { payload }) => {
         // state.LoadingLogin = false
-        console.log(payload);
         const data: Array<any> = payload.data as Array<any> ?? []
         const categories: Array<Category> = transformToCategories(data)
         state.Categories = categories

@@ -37,7 +37,7 @@ const CategoriesTable: React.FC<IProps> = ({
 
     const initialPage = useCallback(() => {
         dispatch(getCategoriesData())
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         initialPage()
@@ -78,10 +78,10 @@ const CategoriesTable: React.FC<IProps> = ({
                         StateCategories.Categories.map((v, k) => {
                             return <TR key={k}>
                                 <TD align='center'>{(k + 1)}</TD>
-                                <TD align='center'>
-                                    {
-                                        v.Icon !== null ? <Image src='/assets/static/brand.png' width={150} height={150} alt='brand-image' priority /> : '-'
-                                    }
+                                <TD>
+                                    <ImageWrapper>
+                                        <Image src={v.Icon} width={50} height={100} alt='brand-image' priority />
+                                    </ImageWrapper>
                                 </TD>
                                 <TD>{v.Name}</TD>
                                 <TD align='center'>-</TD>
@@ -111,7 +111,11 @@ const Wrapper = styled.div`
         border-top: 1px solid ${ColorScheme.textDarkTint.tint80};
     }
 `
-
+const ImageWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`
 const TableWrapper = styled.table`
     width: 100%;
 `
