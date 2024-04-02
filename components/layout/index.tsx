@@ -3,6 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Sidebar from '@/components/navigation/sidebar'
+import Navbar from '@/components/navigation/navbar'
 import { SidebarWidth } from '@/components/utils'
 import { ColorScheme } from '@/components/color'
 
@@ -16,6 +17,7 @@ const Layout: React.FC<IProps> = ({
         <Wrapper>
             <Sidebar />
             <ContentWrapper>
+                <Navbar title='Dashboard' />
                 {children}
             </ContentWrapper>
         </Wrapper>
