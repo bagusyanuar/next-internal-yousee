@@ -18,6 +18,12 @@ export const ColorScheme = {
         tint20: 'color-mix(in srgb, white 20%, var(--dark-color))',
         tint80: 'color-mix(in srgb, white 80%, var(--dark-color))',
         tint90: 'color-mix(in srgb, white 90%, var(--dark-color))',
+    },
+    danger: 'var(--danger-color)',
+    dangerTint: {
+        tint20: 'color-mix(in srgb, white 20%, var(--danger-color))',
+        tint80: 'color-mix(in srgb, white 80%, var(--danger-color))',
+        tint90: 'color-mix(in srgb, white 90%, var(--danger-color))',
     }
 }
 

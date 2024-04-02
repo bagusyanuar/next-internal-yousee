@@ -9,13 +9,13 @@ interface IProps {
     className?: string
     pageTitle: TPageTitle
     userProfile: TProfile
-    notification: number
+    notification?: number
 }
 const Layout: React.FC<IProps> = ({
     children,
     pageTitle,
     userProfile,
-    notification,
+    notification = 0,
     className = ''
 }) => {
     return (
@@ -30,6 +30,7 @@ const Layout: React.FC<IProps> = ({
                 />
                 {children}
             </ContentWrapper>
+
         </Wrapper>
     )
 }

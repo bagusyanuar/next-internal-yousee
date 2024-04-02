@@ -1,10 +1,10 @@
 import React from 'react'
-import { THeader } from './index'
+// import { THeader } from './index'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/utils'
 
 interface IProps {
-    headers: Array<THeader>
+    headers: Array<any>
     className?: string
 }
 const TableHeader: React.FC<IProps> = ({
@@ -38,7 +38,6 @@ const Wrapper = styled.thead`
 
 type TTHProps = {
     $width?: string
-
 }
 const StyledHeader = styled.th<TTHProps>`
     font-size: 0.8em;

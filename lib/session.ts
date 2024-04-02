@@ -3,6 +3,11 @@ import { SessionOptions } from 'iron-session'
 export const sessionOptions: SessionOptions = {
     password: process.env.SECRET_SESSION as string,
     cookieName: 'user',
+    cookieOptions: {
+        maxAge: 60 * 60,
+        sameSite: "strict",
+        path: "/"
+    }
 }
 
 export type User = {
@@ -13,6 +18,7 @@ export type User = {
 declare module 'iron-session' {
     interface SessionData {
         token?: string,
-        user?: User
+        user?: User,
+        cookieUser?: string
     }
 }

@@ -12,10 +12,20 @@
   --dark-color: #334a52;
   --light-color: #96afb8;
   --accent-color: #9A4600;
-  --danger-color: #E40017;
-  --success-color: #004225;
+  --danger-color: #FF355A;
+  --success-color: #47D767;
+  --info-color: #2F86E7;
+  --warning-color: #FEC120;
 }
 
+.custom-toast {
+  padding: 0 0 !important;
+  min-height: auto !important;
+}
+
+.custom-toast-body {
+  padding: 0 0 !important;
+}
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

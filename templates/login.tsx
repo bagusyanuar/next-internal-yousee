@@ -3,12 +3,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/utils'
-import { LoginFormMolecule as FormLogin } from '@/components/molecules/login'
+import { FormLogin } from '@/components/molecules/login'
+import { ToastContainer, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginTemplate() {
   return (
     <Wrapper>
       <FormLogin />
+      <ToastContainer 
+        hideProgressBar
+      />
     </Wrapper>
   )
 }

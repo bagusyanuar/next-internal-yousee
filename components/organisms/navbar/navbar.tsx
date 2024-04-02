@@ -6,14 +6,14 @@ import { TPageTitle, TProfile } from '@/components/utils'
 interface IProps {
     pageTitle: TPageTitle
     userProfile: TProfile
-    notification: number
+    notification?: number
     className?: string
 
 }
 const Navbar: React.FC<IProps> = ({
     pageTitle,
     userProfile,
-    notification,
+    notification = 0,
     className = ''
 }) => {
     return (
