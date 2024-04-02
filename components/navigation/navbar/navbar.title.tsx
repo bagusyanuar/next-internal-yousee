@@ -1,17 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/color'
+import { FontSize } from '@/components/utils'
 
 interface IProps {
     title: string
+    subTitle: string
 }
 
 const NavbarTitle: React.FC<IProps> = ({
-    title
+    title,
+    subTitle
 }) => {
     return (
         <Wrapper>
             <StyledTitle>{title}</StyledTitle>
+            <StyledNavbarSubTitle>{subTitle}</StyledNavbarSubTitle>
         </Wrapper>
     )
 }
@@ -25,8 +29,15 @@ const Wrapper = styled.div`
 `
 
 const StyledTitle = styled.p`
-    font-size: 1.75em;
+    font-size: ${FontSize.large};
     font-weight: 500;
     color: ${ColorScheme.textDark};
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+`
+
+const StyledNavbarSubTitle = styled.p`
+    font-size: ${FontSize.normal};
+    color: ${ColorScheme.textLightShades.shades20};
+    margin-bottom: 0;
+    line-height: 1;
 `

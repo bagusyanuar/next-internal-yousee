@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import SidebarBrand from './sidebar.brand'
 import SidebarItem from './sidebar.item'
 import { SidebarWidth } from '@/components/utils'
+import { ClientPath } from '@/lib/path'
 
 const Sidebar: React.FC = () => {
     const pathName = usePathname()
@@ -14,6 +15,10 @@ const Sidebar: React.FC = () => {
                 <SidebarItemWrapper>
                     <SidebarItem to='#' text='Dashboard' icon='bx bxs-dashboard' className={`${pathName.startsWith('/dashboard') ? 'active' : ''}`} />
                     <SidebarItem to='#' text='User' icon='bx bx-user' className={`${pathName.startsWith('/user') ? 'active' : ''}`} />
+                    <SidebarItem to={ClientPath.category.index} text='Category' icon='bx bx-category-alt' className={`${pathName.startsWith('/category') ? 'active' : ''}`} />
+                    <SidebarItem to='#' text='Vendor' icon='bx bx-network-chart' className={`${pathName.startsWith('/vendor') ? 'active' : ''}`} />
+                    <SidebarItem to='#' text='Product' icon='bx bx-briefcase' className={`${pathName.startsWith('/product') ? 'active' : ''}`} />
+                    <SidebarItem to='#' text='Project' icon='bx bx-receipt' className={`${pathName.startsWith('/project') ? 'active' : ''}`} />
                 </SidebarItemWrapper>
             </SidebarContainer>
         </Wrapper>

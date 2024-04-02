@@ -1,16 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import { usePathname } from 'next/navigation'
 import NavbarTitle from './navbar.title'
+import NavbarProfile from './profile'
+import { TNavbarTitle, useNavbarTitle } from './hooks'
 
-interface IProps {
-    title: string
-}
-const Navbar: React.FC<IProps> = ({
-    title
-}) => {
+const Navbar: React.FC = () => {
+    const pathName = usePathname()
+    const navbarTitle: TNavbarTitle = useNavbarTitle(pathName)
     return (
         <Wrapper>
-            <NavbarTitle title={title} />
+            <NavbarTitle title={navbarTitle.Title} subTitle={navbarTitle.SubTitle} />
+            <NavbarProfile />
         </Wrapper>
     )
 }

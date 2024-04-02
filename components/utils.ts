@@ -1,3 +1,9 @@
+export const FontSize = {
+    large: '1.5em',
+    normal: '1em',
+    small: '0.75em'
+}
+
 export const CardPadding = {
     small: '1rem 1rem',
     medium: '1.5rem 1.5rem',

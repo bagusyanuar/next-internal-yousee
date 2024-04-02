@@ -17,7 +17,7 @@ const Layout: React.FC<IProps> = ({
         <Wrapper>
             <Sidebar />
             <ContentWrapper>
-                <Navbar title='Dashboard' />
+                <Navbar />
                 {children}
             </ContentWrapper>
         </Wrapper>
