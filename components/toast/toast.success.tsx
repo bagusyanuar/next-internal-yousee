@@ -1,40 +1,43 @@
-import { ColorScheme } from '@/components/utils'
 import React from 'react'
 import { ToastContentProps } from 'react-toastify'
 import styled from 'styled-components'
+import { ColorScheme } from '@/components/color'
 
 interface IProps {
-  text?: string
+    text?: string
 }
+
 const ToastSuccess: React.FC<Partial<ToastContentProps> & IProps> = ({
-  closeToast,
-  toastProps,
-  text = '',
+    closeToast,
+    toastProps,
+    text = '',
 }) => {
-  return (
-    <Wrapper>
-      <div className='spacer-color'></div>
-      <div className='content-wrapper'>
-        <div className='icon-wrapper'>
-          <i className='bx bxs-check-circle'></i>
-        </div>
-        <div className='notification-content'>
-          <span className='title'>Success</span>
-          <span className='description'>{text}</span>
-        </div>
-        <div className='close-button-wrapper'>
-          <a href='#' onClick={(e) => {
-            e.preventDefault();
-            if (closeToast) {
-              closeToast()
-            }
-          }}>
-            <i className='bx bx-x'></i>
-          </a>
-        </div>
-      </div>
-    </Wrapper>
-  )
+
+    const handleCloseToast = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.preventDefault();
+        if (closeToast) {
+            closeToast()
+        }
+    }
+    return (
+        <Wrapper>
+            <div className='spacer-color'></div>
+            <div className='content-wrapper'>
+                <div className='icon-wrapper'>
+                    <i className='bx bxs-check-circle'></i>
+                </div>
+                <div className='notification-content'>
+                    <span className='title'>Success</span>
+                    <span className='description'>{text}</span>
+                </div>
+                <div className='close-button-wrapper'>
+                    <a href='#' onClick={handleCloseToast}>
+                        <i className='bx bx-x'></i>
+                    </a>
+                </div>
+            </div>
+        </Wrapper>
+    )
 }
 
 export default ToastSuccess

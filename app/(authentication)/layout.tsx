@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import StyledComponentsRegistry from '@/lib/styled.component.registry'
 import { Providers } from '../StoreProvider'
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

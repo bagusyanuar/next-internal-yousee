@@ -1,9 +1,6 @@
 import React from 'react'
 import ToastSuccess from './toast.success'
-import ToastInfo from './toast.info'
-import ToastWarning from './toast.warning'
-import ToastError from './toast.error'
-import { toast, Slide, Id } from "react-toastify";
+import { toast, Slide, Id } from "react-toastify"
 
 interface IPropsToast {
     onClose?: () => void
@@ -28,7 +25,4 @@ function TOAST(content: React.ReactNode, {
 export {
     TOAST,
     ToastSuccess,
-    ToastInfo,
-    ToastWarning,
-    ToastError
 }
