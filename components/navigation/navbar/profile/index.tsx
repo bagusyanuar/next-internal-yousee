@@ -16,8 +16,8 @@ const NavbarProfile: React.FC = () => {
     }
 
     return (
-        <Wrapper ref={ref} onClick={toggleDropdownHandler}>
-            <Image src={AvatarFace} alt='user-avatar' priority />
+        <Wrapper onClick={toggleDropdownHandler}>
+            <Image ref={ref}  src={AvatarFace} alt='user-avatar' priority />
             <NavbarProfileDropdown className={`${openDropdown ? 'open' : ''}`} />
         </Wrapper>
     )
@@ -55,10 +55,13 @@ function useOuterClick(callback: () => void): any {
                 | HTMLButtonElement
                 | HTMLHeadingElement
                 | HTMLDivElement;
-            if (target?.contains(innerRef.current)) {
+            // if (target?.contains(innerRef.current)) {
+            //     callback()
+            // }
+            if (target !== innerRef.current) {
                 callback()
             }
-
+            
         };
         return () => {
             window.removeEventListener('click', handleClick);

@@ -20,7 +20,7 @@ export default Navbar
 
 const Wrapper = styled.div`
     width: 100%;
-    padding-right: 1rem;
+    padding-right: 0;
     padding-left: 0;
     padding-top: 1rem;
     padding-bottom: 1rem;

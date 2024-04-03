@@ -1,18 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ButtonPadding, ColorScheme } from '@/components/utils'
-
-type TTheme = 'primary' | 'accent'
+import { ColorScheme } from '@/components/color'
 
 interface IProps {
     children?: React.ReactNode
-    theme?: TTheme
     className?: string
     onClick?: () => void
 }
+
 const Button: React.FC<IProps> = ({
     children,
-    theme = 'primary',
     className = '',
     onClick = () => { }
 }) => {
@@ -28,7 +25,7 @@ export default Button
 const StyledButton = styled.button`
     background-color: ${ColorScheme.primary};
     color: whitesmoke;
-    padding: ${ButtonPadding.medium};
+    padding: 0.5rem 1rem;
     font-size: 0.8em;
     border-radius: 5px;
     transition: all ease-in-out 200ms;

@@ -18,7 +18,9 @@ const Layout: React.FC<IProps> = ({
             <Sidebar />
             <ContentWrapper>
                 <Navbar />
-                {children}
+                <Content>
+                    {children}
+                </Content>
             </ContentWrapper>
         </Wrapper>
     )
@@ -39,5 +41,12 @@ const ContentWrapper = styled.div`
     flex-direction: column;
     padding-left: ${SidebarWidth};
     padding-right: 1rem;
+    width: 100%;
+    min-height: 100vh;
+    
+`
+
+const Content = styled.div`
+    flex-grow: 1;
     width: 100%;
 `
