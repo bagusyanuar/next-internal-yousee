@@ -2,19 +2,20 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import TABLE, { THEAD, TD, TH } from '@/components/table'
 import TableLength from '@/components/table/table.length'
+import TablePagination from '@/components/table/table.pagination'
 
 
 const CategorySectionTable: React.FC = () => {
     const [columnNameDirection, setColumnNameDirection] = useState<'asc' | 'desc'>('asc')
 
-    
+
     return (
         <Wrapper>
             <HeaderWrapper>
-                <TableLength 
+                <TableLength
                     length={[10, 25, 50]}
                     value={10}
-                    onChange={() => {}}
+                    onChange={() => { }}
                 />
             </HeaderWrapper>
             <TABLE>
@@ -37,6 +38,12 @@ const CategorySectionTable: React.FC = () => {
 
                 </tbody>
             </TABLE>
+            <TablePagination
+                page={1}
+                totalPage={5}
+                totalRows={100}
+                onPageChange={(page: number) => { }}
+            />
         </Wrapper>
     )
 }
