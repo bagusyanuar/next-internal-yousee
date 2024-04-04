@@ -23,6 +23,10 @@ export function useNavbarTitle(pathname: string): TNavbarTitle {
             value.Title = 'Category'
             value.SubTitle = 'Manage yousee product category'
             break;
+        case ClientPath.category.add:
+            value.Title = 'Category'
+            value.SubTitle = 'Create new yousee product category'
+            break;
         default:
             break;
     }

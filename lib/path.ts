@@ -6,6 +6,7 @@ export const ClientPath = {
         index: '/user'
     },
     category: {
-        index: '/category'
+        index: '/category',
+        add: '/category/add'
     }
 }

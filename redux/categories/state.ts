@@ -1,5 +1,13 @@
 import { Category } from "@/model/category";
 
+type TEntity = {
+    Name: string
+}
+
+const defaultEntity: TEntity = {
+    Name: ''
+}
+
 type TPagination = {
     PageLength: Array<number>
     PerPage: number
@@ -18,6 +26,7 @@ export type TState = {
     Sort: TSort | undefined
     LoadingData: boolean
     Categories: Array<Category>
+    Entity: TEntity
 }
 
 const initialState: TState = {
@@ -30,7 +39,8 @@ const initialState: TState = {
     Query: '',
     Sort: undefined,
     LoadingData: true,
-    Categories: []
+    Categories: [],
+    Entity: defaultEntity
 }
 
 export default initialState

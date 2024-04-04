@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/redux/store'
+import type { PayloadEntity } from '@/lib/redux'
 import initialState, { TSort } from './state'
 import eventReducers from './events'
 
@@ -23,8 +24,9 @@ const slice = createSlice({
         SetSort: (state, action: PayloadAction<TSort>) => {
             state.Sort = action.payload
         },
-
-
+        SetEntity: (state, action: PayloadAction<PayloadEntity>) => {
+            state.Entity.Name = action.payload.value as string
+        },
     },
     extraReducers: eventReducers,
 })
@@ -35,7 +37,8 @@ export const {
     SetPerPage,
     SetPage,
     SetQuery,
-    SetSort
+    SetSort,
+    SetEntity
 } = slice.actions
 
 export const CategoriesState = (state: RootState) => state.categories

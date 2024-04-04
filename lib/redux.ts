@@ -22,3 +22,5 @@ export const RejectToAPIResponse = (error: any | AxiosError): APIResponse => {
     }
     return response
 }
+
+export type PayloadEntity = { key: string, value: any }

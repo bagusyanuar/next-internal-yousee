@@ -1,13 +1,19 @@
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import SectionTitle from '@/components/typography/section.title'
 import Button from '@/components/button'
 
 const CategorySectionHeader = () => {
+    const router = useRouter()
+
+    const handleGoToAddPage = () => {
+        router.push('/category/add')
+    }
     return (
         <Wrapper>
             <SectionTitle text='Categories Data' />
-            <Button>
+            <Button onClick={handleGoToAddPage}>
                 <ButtonContent>
                     <i className='bx bx-plus'></i>
                     <span>ADD</span>
