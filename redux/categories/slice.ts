@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/redux/store'
-import initialState from './state'
+import initialState, { TSort } from './state'
 import eventReducers from './events'
 
 const slice = createSlice({
@@ -8,6 +8,9 @@ const slice = createSlice({
     initialState,
     reducers: {
         Reset: () => initialState,
+        SetLoadingData: (state, action: PayloadAction<boolean>) => {
+            state.LoadingData = action.payload
+        },
         SetPerPage: (state, action: PayloadAction<number>) => {
             state.Pagination.PerPage = action.payload
         },
@@ -17,16 +20,22 @@ const slice = createSlice({
         SetQuery: (state, action: PayloadAction<string>) => {
             state.Query = action.payload
         },
-        
+        SetSort: (state, action: PayloadAction<TSort>) => {
+            state.Sort = action.payload
+        },
+
+
     },
     extraReducers: eventReducers,
 })
 
 export const {
     Reset,
+    SetLoadingData,
     SetPerPage,
     SetPage,
-    SetQuery
+    SetQuery,
+    SetSort
 } = slice.actions
 
 export const CategoriesState = (state: RootState) => state.categories

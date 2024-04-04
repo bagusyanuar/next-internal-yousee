@@ -4,6 +4,8 @@ import "../globals.css";
 import StyledComponentsRegistry from '@/lib/styled.component.registry'
 import { Providers } from '../StoreProvider'
 import 'react-toastify/dist/ReactToastify.css';
+import { LoaderDots } from '@/components/loader'
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +27,9 @@ export default function RootLayout({
         </head>
         <body className={inter.className}>
           <StyledComponentsRegistry>
-            {children}
+            <Suspense fallback={<LoaderDots height="100vh" />}>
+              {children}
+            </Suspense>
           </StyledComponentsRegistry>
         </body>
       </html>

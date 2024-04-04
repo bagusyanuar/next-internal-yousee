@@ -4,13 +4,15 @@ import styled from 'styled-components'
 interface IProps {
     width: string
     height: string
+    className?: string
 }
 const Shimmer: React.FC<IProps> = ({
     width,
-    height
+    height,
+    className = ''
 }) => {
     return (
-        <Wrapper>
+        <Wrapper className={className}>
             <Content
                 $width={width}
                 $height={height}

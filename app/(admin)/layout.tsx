@@ -7,6 +7,8 @@ import { cookies } from 'next/headers'
 import { getIronSession, SessionData } from 'iron-session'
 import { sessionOptions, User } from '@/lib/session'
 import Layout from '@/components/layout'
+import { LoaderDots } from '@/components/loader'
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,10 +31,13 @@ export default async function RootLayout({
                     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
                 </head>
                 <body className={inter.className}>
+
                     <StyledComponentsRegistry>
-                        <Layout>
-                            {children}
-                        </Layout>
+                        <Suspense fallback={<LoaderDots height="100vh" />}>
+                            <Layout>
+                                {children}
+                            </Layout>
+                        </Suspense>
                     </StyledComponentsRegistry>
                 </body>
             </html>

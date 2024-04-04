@@ -47,7 +47,7 @@ const StyledTHEAD = styled.thead`
 export type TTHSort = {
   key: string,
   defaultDirection: 'asc' | 'desc'
-  onSort: (direction: 'asc' | 'desc') => void
+  onSort: (key: string, direction: 'asc' | 'desc') => void
 }
 
 interface ITHProps {
@@ -72,16 +72,19 @@ export const TH: React.FC<ITHProps> = ({
     e.preventDefault()
     switch (direction) {
       case 'asc':
-        setDirection('desc')
+        if (sort) {
+          setDirection('desc')
+          sort.onSort(sort.key, 'desc')
+        }
         break;
       case 'desc':
-        setDirection('asc')
+        if (sort) {
+          setDirection('asc')
+          sort.onSort(sort.key, 'asc')
+        }
         break;
       default:
         break;
-    }
-    if (sort) {
-      sort.onSort(direction)
     }
   }
   return (
