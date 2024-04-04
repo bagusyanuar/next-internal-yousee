@@ -1,5 +1,6 @@
 import React from 'react'
 import ToastSuccess from './toast.success'
+import ToastError from './toast.error'
 import { toast, Slide, Id } from "react-toastify"
 
 interface IPropsToast {
@@ -25,4 +26,5 @@ function TOAST(content: React.ReactNode, {
 export {
     TOAST,
     ToastSuccess,
+    ToastError
 }

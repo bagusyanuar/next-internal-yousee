@@ -3,13 +3,18 @@
 import React from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
+import { useRouter } from 'next/navigation'
 import { ToastContainer } from 'react-toastify';
 import Card from '@/components/card'
 import InputText from '@/components/input/text/text.validator.icon'
 import InputPassword from '@/components/input/password/password.validator.icon'
 import ButtonLoading from '@/components/button/button.loading'
+import Checkbox from '@/components/checkbox'
+import Link from '@/components/link'
 import { ColorScheme } from '@/components/color'
-import { TOAST, ToastSuccess } from '@/components/toast'
+import { TOAST, ToastSuccess, ToastError } from '@/components/toast'
+import { APIResponse } from '@/lib/jsonResponse'
+import { ClientPath } from '@/lib/path'
 import BrandImage from '@/public/assets/static/brand.png'
 import {
     LoginState,
@@ -17,11 +22,13 @@ import {
     SetPassword,
     SetRememberMe,
 } from '@/redux/login/slice'
+import { submit } from '@/redux/login/action'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 
 const LoginPage: React.FC = () => {
     const StateLogin = useAppSelector(LoginState)
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(SetUsername(e.currentTarget.value))
@@ -31,12 +38,28 @@ const LoginPage: React.FC = () => {
         dispatch(SetPassword(e.currentTarget.value))
     }
 
+    const handleChangeRememberMe = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(SetRememberMe(e.currentTarget.checked))
+    }
+
+
     const handleLogin = () => {
-        TOAST(<ToastSuccess text='success' />, {
-            timeToClose: 2000,
-            onClose: () => {
-                console.log('toast close');
-                // router.push(PageRouter.Dashboard)
+        dispatch(submit()).then(response => {
+            const payload: APIResponse = response.payload as APIResponse
+            switch (payload.code) {
+                case 200:
+                    TOAST(<ToastSuccess text={payload.message} />, {
+                        timeToClose: 1000,
+                        onClose: () => {
+                            router.replace(ClientPath.dashboard.index)
+                        }
+                    })
+                    break;
+                default:
+                    TOAST(<ToastError text={payload.message} />, {
+                        timeToClose: 2000,
+                    })
+                    break;
             }
         })
     }
@@ -61,8 +84,17 @@ const LoginPage: React.FC = () => {
                     placeholder='password'
                     validator=''
                 />
+                <OptionWrapper>
+                    <Checkbox
+                        text='Remember Me'
+                        value='1'
+                        checked={StateLogin.RememberMe}
+                        onChange={handleChangeRememberMe}
+                    />
+                    <ForgotPassword to='/forgot-password' text='Forgot Password?' />
+                </OptionWrapper>
                 <LoginButton
-                    onLoading={false}
+                    onLoading={StateLogin.LoadingLogin}
                     onClick={handleLogin}
                     className='btn-login'
                 >
@@ -109,6 +141,20 @@ const FormPassword = styled(InputPassword)`
     margin-bottom: 0.75rem;
 `
 
+const OptionWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.75rem;
+`
+const ForgotPassword = styled(Link)`
+    font-weight: 500;
+    font-size: 0.7em;
+`
+
 const LoginButton = styled(ButtonLoading)`
     width: 100%;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
 `
