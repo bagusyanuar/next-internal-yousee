@@ -1,6 +1,5 @@
 import React, { CSSProperties, useCallback, useMemo } from 'react'
-import styled from 'styled-components'
-import { DropzoneRootProps, DropzoneState, useDropzone } from 'react-dropzone'
+import { useDropzone } from 'react-dropzone'
 import { ColorScheme } from '@/components/color'
 // import 'react-dropzone/examples/theme.css'
 
