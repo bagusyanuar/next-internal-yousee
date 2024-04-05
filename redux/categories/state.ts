@@ -25,6 +25,7 @@ export type TState = {
     Query: string
     Sort: TSort | undefined
     LoadingData: boolean
+    LoadingSave: boolean
     Categories: Array<Category>
     Entity: TEntity
 }
@@ -39,6 +40,7 @@ const initialState: TState = {
     Query: '',
     Sort: undefined,
     LoadingData: true,
+    LoadingSave: false,
     Categories: [],
     Entity: defaultEntity
 }

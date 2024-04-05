@@ -29,6 +29,9 @@ const slice = createSlice({
                 state.Entity.Name = action.payload.value as string
             }
         },
+        SetLoadingSave: (state, action: PayloadAction<boolean>) => {
+            state.LoadingSave = action.payload
+        },
     },
     extraReducers: eventReducers,
 })
@@ -40,7 +43,8 @@ export const {
     SetPage,
     SetQuery,
     SetSort,
-    SetEntity
+    SetEntity,
+    SetLoadingSave
 } = slice.actions
 
 export const CategoriesState = (state: RootState) => state.categories

@@ -7,7 +7,8 @@ interface IProps {
     children?: React.ReactNode
     className?: string
 }
-const LabelRequired: React.FC<IProps> = ({
+
+const Label: React.FC<IProps> = ({
     htmlFor,
     children,
     className = ''
@@ -15,22 +16,15 @@ const LabelRequired: React.FC<IProps> = ({
     return (
         <Wrapper htmlFor={htmlFor} className={className}>
             {children}
-            <span className='mark'>(*)</span>
         </Wrapper>
     )
 }
 
-export default LabelRequired
+export default Label
 
 const Wrapper = styled.label`
     display: flex;
     font-size: 0.8em;
     color: ${ColorScheme.textDarkTint.tint20};
     margin-bottom:  0.25rem;
-
-    .mark {
-        margin-left: 0.25rem;
-        color: ${ColorScheme.dangerTint.tint20};
-        /* font-style: italic; */
-    }
 `

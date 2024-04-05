@@ -30,7 +30,7 @@ const InputTextValidator: React.FC<IProps> = ({
         <MainWrapper className={className}>
             {
                 (label !== undefined) ?
-                    <Label id={id || inputID}>{label}</Label>
+                    <RequiredLabel htmlFor={id || inputID}>{label}</RequiredLabel>
                     : <></>
             }
             <Wrapper>
@@ -99,8 +99,4 @@ const MainWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-`
-
-const Label = styled(RequiredLabel)`
-    margin-bottom: 0.25rem;
 `
