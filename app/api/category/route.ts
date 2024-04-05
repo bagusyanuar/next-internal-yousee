@@ -7,11 +7,16 @@ import { cookies } from 'next/headers'
 import { getIronSession, SessionData } from 'iron-session'
 import { sessionOptions, User } from '@/lib/session'
 
+const prefix = '/media-type'
+
 export async function GET(request: Request) {
     return await GetCategoryHandler(request)
 }
 
-const prefix = '/media-type'
+export async function POST(request: Request) {
+    return await PostCategoryHandler(request)
+}
+
 const GetCategoryHandler = async (request: Request): Promise<Response> => {
     try {
         const session = await getIronSession<SessionData>(cookies(), sessionOptions)
@@ -39,6 +44,31 @@ const GetCategoryHandler = async (request: Request): Promise<Response> => {
             message = error.response ? error.response.data.message : 'internal server error'
             console.log('test error');
             
+        }
+        return JSONResponse(code, { message: message })
+    }
+}
+
+const PostCategoryHandler = async (request: Request): Promise<Response> => {
+    try {
+        const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+        AxiosServer.defaults.headers.common["Content-Type"] = 'multipart/form-data'
+        AxiosServer.defaults.headers.common.Authorization = `Bearer ${session.token}`
+        const form = await request.formData()
+        let url = `${prefix}`
+        const response: AxiosResponse = await AxiosServer.post(url, form, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        const message: string = response?.data.message
+        return JSONSuccessResponse({ message: message })
+    } catch (error: any | AxiosError) {
+        let code: number = 500
+        let message: string = 'internal server error'
+        if (axios.isAxiosError(error)) {
+            code = error.response ? error.response?.status : 500
+            message = error.response ? error.response.data.message : 'internal server error'
         }
         return JSONResponse(code, { message: message })
     }

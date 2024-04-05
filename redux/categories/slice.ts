@@ -25,7 +25,9 @@ const slice = createSlice({
             state.Sort = action.payload
         },
         SetEntity: (state, action: PayloadAction<PayloadEntity>) => {
-            state.Entity.Name = action.payload.value as string
+            if (action.payload.key === "Name") {
+                state.Entity.Name = action.payload.value as string
+            }
         },
     },
     extraReducers: eventReducers,

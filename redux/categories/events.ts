@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import type { TState } from './state'
-import { getCategoriesData } from './action'
+import { getCategoriesData, createNewCategory } from './action'
 import { transformToCategories } from "@/model/transform/category"
 import { Category } from "@/model/category";
 
@@ -22,8 +22,27 @@ const onGetCategoriesBuilder = (builder: ActionReducerMapBuilder<TState>): Actio
     })
 }
 
+const onCreateCategoryBuilder = (builder: ActionReducerMapBuilder<TState>): ActionReducerMapBuilder<TState> => {
+    return builder.addCase(createNewCategory.pending, (state) => {
+        // state.LoadingData = true
+    }).addCase(createNewCategory.fulfilled, (state, { payload }) => {
+        // state.LoadingData = false
+        // const data: Array<any> = payload.data as Array<any> ?? []
+        // const categories: Array<Category> = transformToCategories(data)
+        // console.log(categories);
+        
+        // state.Categories = categories
+        
+    }).addCase(createNewCategory.rejected, (state, { payload }) => {
+        // state.LoadingData = false
+        // console.log(payload);
+        // state.Categories = []
+    })
+}
+
 const extraReducers = (builder: ActionReducerMapBuilder<TState>) => {
     onGetCategoriesBuilder(builder);
+    onCreateCategoryBuilder(builder);
 }
 
 export default extraReducers

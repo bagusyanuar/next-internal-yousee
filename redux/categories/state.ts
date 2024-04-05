@@ -5,7 +5,7 @@ type TEntity = {
 }
 
 const defaultEntity: TEntity = {
-    Name: ''
+    Name: '',
 }
 
 type TPagination = {
