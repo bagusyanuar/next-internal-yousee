@@ -9,6 +9,7 @@ import { sessionOptions, User } from '@/lib/session'
 import Layout from '@/components/layout'
 import { LoaderDots } from '@/components/loader'
 import { Suspense } from "react";
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

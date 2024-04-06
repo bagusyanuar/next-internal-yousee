@@ -24,19 +24,12 @@ const onGetCategoriesBuilder = (builder: ActionReducerMapBuilder<TState>): Actio
 
 const onCreateCategoryBuilder = (builder: ActionReducerMapBuilder<TState>): ActionReducerMapBuilder<TState> => {
     return builder.addCase(createNewCategory.pending, (state) => {
-        // state.LoadingData = true
+        state.ModalConfirmation = false
+        state.LoadingSave = true
     }).addCase(createNewCategory.fulfilled, (state, { payload }) => {
-        // state.LoadingData = false
-        // const data: Array<any> = payload.data as Array<any> ?? []
-        // const categories: Array<Category> = transformToCategories(data)
-        // console.log(categories);
-        
-        // state.Categories = categories
-        
+        state.LoadingSave = false
     }).addCase(createNewCategory.rejected, (state, { payload }) => {
-        // state.LoadingData = false
-        // console.log(payload);
-        // state.Categories = []
+        state.LoadingSave = false
     })
 }
 

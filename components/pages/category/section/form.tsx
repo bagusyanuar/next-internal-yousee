@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { ToastContainer } from 'react-toastify';
 import InputText from '@/components/input/text/text.validator'
 import FormIcon from '@/components/input/dropzone'
 import Label from '@/components/input/label'
 import ButtonLoading from '@/components/button/button.loading'
+import ModalConfirmation from '@/components/modal/modal.confirmation'
+import { TOAST, ToastSuccess, ToastError } from '@/components/toast'
+import { APIResponse } from '@/lib/jsonResponse'
+
 
 import {
     CategoriesState,
     SetEntity,
-    SetLoadingSave
+    SetLoadingSave,
+    SetModalConfirmation
 } from '@/redux/categories/slice'
 import { createNewCategory } from '@/redux/categories/action'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
@@ -32,12 +38,32 @@ const CategorySectionForm: React.FC = () => {
             setIcon(null)
         }
     }
+
+    const handleConfirmCreate = () => {
+        dispatch(SetModalConfirmation(true))
+    }
+
     const handleSubmit = () => {
-        dispatch(SetLoadingSave(true))
-        setTimeout(() => {
-            dispatch(SetLoadingSave(false))
-        }, 2000);
-        // dispatch(createNewCategory({ icon }))
+        dispatch(createNewCategory({ icon })).then(response => {
+            const payload: APIResponse = response.payload as APIResponse
+            switch (payload.code) {
+                case 200:
+                    TOAST(<ToastSuccess text={payload.message} />, {
+                        timeToClose: 1000,
+                        onClose: () => {}
+                    })
+                    break;
+                default:
+                    TOAST(<ToastError text={payload.message} />, {
+                        timeToClose: 2000,
+                    })
+                    break;
+            }
+        })
+    }
+
+    const handleCancelSubmit = () => {
+        dispatch(SetModalConfirmation(false))
     }
     return (
         <Wrapper>
@@ -49,33 +75,38 @@ const CategorySectionForm: React.FC = () => {
                 onChange={handleChangeInput}
             />
             <Label>Category Icon</Label>
-            <FormIcon onReceiveFiles={handleReceiveFiles} />
+            <FormIcon
+                onReceiveFiles={handleReceiveFiles}
+                multiple={false}
+                maxSize={1000000}
+            />
             <hr />
             <ActionWrapper>
                 <ButtonLoading
                     onLoading={StateCategory.LoadingSave}
-                    onClick={handleSubmit}>
+                    onClick={handleConfirmCreate}>
                     <ButtonContent>
                         <i className='bx bx-check'></i>
                         <span>Save</span>
                     </ButtonContent>
                 </ButtonLoading>
             </ActionWrapper>
-            {/* <Backdrop /> */}
+            <ModalConfirmation
+                open={StateCategory.ModalConfirmation}
+                text='Are you sure to create new category?'
+                onAccept={handleSubmit}
+                onDenied={handleCancelSubmit}
+            />
+            <ToastContainer
+                hideProgressBar
+            />
         </Wrapper>
     )
 }
 
 export default CategorySectionForm
 
-// const Backdrop = styled.div`
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100vh;
-//     background-color: rgba(0, 0, 0, 0.3);
-// `
+
 const Wrapper = styled.div`
     width: 100%;
     hr {

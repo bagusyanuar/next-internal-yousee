@@ -8,7 +8,7 @@ interface IProps {
     onClick?: () => void
 }
 
-const Button: React.FC<IProps> = ({
+const ButtonOutlineDanger: React.FC<IProps> = ({
     children,
     className = '',
     onClick = () => { }
@@ -20,20 +20,23 @@ const Button: React.FC<IProps> = ({
     )
 }
 
-export default Button
+export default ButtonOutlineDanger
 
 const StyledButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${ColorScheme.primary};
-    color: whitesmoke;
+    background-color: white;
+    color: ${ColorScheme.dangerTint.tint20};
     padding: 0.5rem 1rem;
     font-size: 0.8em;
     border-radius: 5px;
+    border: 1px solid ${ColorScheme.dangerTint.tint20};
     transition: all ease-in-out 200ms;
 
     &:hover {
-        background-color: ${ColorScheme.primaryShades.shade20};
+        color: whitesmoke;
+        background-color: ${ColorScheme.danger};
+        border: 1px solid ${ColorScheme.danger};
     }
 `

@@ -32,6 +32,9 @@ const slice = createSlice({
         SetLoadingSave: (state, action: PayloadAction<boolean>) => {
             state.LoadingSave = action.payload
         },
+        SetModalConfirmation: (state, action: PayloadAction<boolean>) => {
+            state.ModalConfirmation = action.payload
+        },
     },
     extraReducers: eventReducers,
 })
@@ -44,7 +47,8 @@ export const {
     SetQuery,
     SetSort,
     SetEntity,
-    SetLoadingSave
+    SetLoadingSave,
+    SetModalConfirmation
 } = slice.actions
 
 export const CategoriesState = (state: RootState) => state.categories

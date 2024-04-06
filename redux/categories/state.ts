@@ -26,6 +26,7 @@ export type TState = {
     Sort: TSort | undefined
     LoadingData: boolean
     LoadingSave: boolean
+    ModalConfirmation: boolean
     Categories: Array<Category>
     Entity: TEntity
 }
@@ -41,6 +42,7 @@ const initialState: TState = {
     Sort: undefined,
     LoadingData: true,
     LoadingSave: false,
+    ModalConfirmation: false,
     Categories: [],
     Entity: defaultEntity
 }

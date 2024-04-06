@@ -1,12 +1,15 @@
 import React, { CSSProperties, useCallback, useMemo, useState, useEffect } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { useDropzone } from 'react-dropzone'
+import { useDropzone, FileRejection, DropEvent } from 'react-dropzone'
 import { ColorScheme } from '@/components/color'
 // import 'react-dropzone/examples/theme.css'
 
 interface IProps {
     onReceiveFiles: (files: File[]) => void
+    maxSize?: number
+    multiple?: boolean
+    onRejectFiles?: (rejectionFiles: Array<FileRejection>) => void
     className?: string
 }
 
@@ -16,7 +19,10 @@ type TFileContent = {
 }
 const Dropzone: React.FC<IProps> = ({
     onReceiveFiles,
-    className = ''
+    maxSize = 1000000,
+    multiple = true,
+    className = '',
+    onRejectFiles = (rejectionFIles: Array<FileRejection>) => { }
 }) => {
     const [files, setFiles] = useState<Array<TFileContent>>([]);
 
@@ -31,47 +37,54 @@ const Dropzone: React.FC<IProps> = ({
         setFiles(tmpFiles)
     }, [onReceiveFiles])
 
+    const onDropRejected = useCallback((fileRejections: FileRejection[], event: DropEvent) => {
+        onRejectFiles(fileRejections)
+    }, [onRejectFiles])
+
     const {
         getRootProps,
         getInputProps,
         isDragAccept,
         isFocused,
-        isDragReject
+        isDragReject,
     } = useDropzone({
         accept: {
             'image/*': []
         },
-        onDrop
+        maxSize: maxSize,
+        multiple: multiple,
+        onDrop,
+        onDropRejected
     })
 
 
-    const style = useMemo(() => ({
-        ...baseStyle,
-        ...(isFocused ? focusedStyle : {}),
-        ...(isDragAccept ? acceptStyle : {}),
-        ...(isDragReject ? rejectStyle : {})
-    }), [
-        isFocused,
-        isDragAccept,
-        isDragReject
-    ]);
+const style = useMemo(() => ({
+    ...baseStyle,
+    ...(isFocused ? focusedStyle : {}),
+    ...(isDragAccept ? acceptStyle : {}),
+    ...(isDragReject ? rejectStyle : {})
+}), [
+    isFocused,
+    isDragAccept,
+    isDragReject
+]);
 
-    const onRemoveFile = (files: Array<TFileContent>) => {
-        setFiles(files)
-    }
+const onRemoveFile = (files: Array<TFileContent>) => {
+    setFiles(files)
+}
 
-    useEffect(() => {
-        // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-        return () => files.forEach(file => URL.revokeObjectURL(file.Preview));
-    }, [files]);
-    return (
-        <div className={`container ${className}`}>
-            <div {...getRootProps({ style })}>
-                <input {...getInputProps()} />
-                <Thumbnail files={files} onRemoveFile={onRemoveFile} />
-            </div>
+useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+    return () => files.forEach(file => URL.revokeObjectURL(file.Preview));
+}, [files]);
+return (
+    <div className={`container ${className}`}>
+        <div {...getRootProps({ style })}>
+            <input {...getInputProps()} />
+            <Thumbnail files={files} onRemoveFile={onRemoveFile} />
         </div>
-    )
+    </div>
+)
 }
 
 export default Dropzone
