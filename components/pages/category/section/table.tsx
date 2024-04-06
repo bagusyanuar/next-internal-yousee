@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import TABLE, { THEAD, TD, TH } from '@/components/table'
 import TableLength from '@/components/table/table.length'
 import TablePagination from '@/components/table/table.pagination'
+import TableAction from '@/components/table/table.action'
 import { LoaderDots } from '@/components/loader'
 import {
     CategoriesState,
@@ -37,14 +38,14 @@ const CategorySectionTable: React.FC = () => {
         dispatch(getCategoriesData())
     }
 
-    const initialPage = useCallback(() => {
-        dispatch(getCategoriesData())
-    }, [dispatch])
+    // const initialPage = useCallback(() => {
+    //     dispatch(getCategoriesData())
+    // }, [dispatch])
 
-    useEffect(() => {
-        initialPage()
-        return () => { }
-    }, [initialPage])
+    // useEffect(() => {
+    //     initialPage()
+    //     return () => { }
+    // }, [initialPage])
 
 
     return (
@@ -74,6 +75,19 @@ const CategorySectionTable: React.FC = () => {
                                 </tr>
                             </THEAD>
                             <tbody>
+                                <TD align='center'>1</TD>
+                                <TD>
+                                    -
+                                </TD>
+                                <TD>Name</TD>
+                                <TD align='center'>
+                                    <TableAction
+                                        onEdit={() => { }}
+                                        onDelete={() => { }}
+                                    />
+                                </TD>
+                            </tbody>
+                            {/* <tbody>
                                 {
                                     StateCategory.Categories.map((v, k) => {
                                         return <tr key={k}>
@@ -92,7 +106,7 @@ const CategorySectionTable: React.FC = () => {
                                         </tr>
                                     })
                                 }
-                            </tbody>
+                            </tbody> */}
                         </TABLE>
                         <TablePagination
                             page={StateCategory.Pagination.Page}

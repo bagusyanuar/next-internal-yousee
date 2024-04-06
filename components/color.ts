@@ -24,5 +24,14 @@ export const ColorScheme = {
         tint20: 'color-mix(in srgb, white 20%, var(--danger-color))',
         tint80: 'color-mix(in srgb, white 80%, var(--danger-color))',
         tint90: 'color-mix(in srgb, white 90%, var(--danger-color))',
+    },
+    warning: 'var(--warning-color)',
+    warningTint: {
+        tint20: 'color-mix(in srgb, white 20%, var(--warning-color))',
+        tint30: 'color-mix(in srgb, white 30%, var(--warning-color))',
+        tint40: 'color-mix(in srgb, white 40%, var(--warning-color))',
+        tint50: 'color-mix(in srgb, white 50%, var(--warning-color))',
+        tint80: 'color-mix(in srgb, white 80%, var(--warning-color))',
+        tint90: 'color-mix(in srgb, white 90%, var(--warning-color))',
     }
 }
