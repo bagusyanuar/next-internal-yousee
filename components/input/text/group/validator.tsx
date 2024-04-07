@@ -1,5 +1,8 @@
+'use client'
+
 import React, { useId } from 'react'
 import styled from 'styled-components'
+import Label from '@/components/input/label'
 import RequiredLabel from '@/components/input/label/label.required'
 import { ColorScheme } from '@/components/color'
 import { InputRadius } from '@/components/utils'
@@ -13,9 +16,10 @@ interface IProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
     className?: string
     placeholder?: string
+    required?: boolean
 }
 
-const InputTextValidator: React.FC<IProps> = ({
+const InputTextGroupValidator: React.FC<IProps> = ({
     value,
     validator,
     id,
@@ -23,14 +27,19 @@ const InputTextValidator: React.FC<IProps> = ({
     label,
     onChange = (e) => { },
     className = '',
-    placeholder = ''
+    placeholder = '',
+    required = false
 }) => {
     const inputID = `input-field-${useId()}`
     return (
         <MainWrapper className={className}>
             {
-                (label !== undefined) ?
-                    <RequiredLabel htmlFor={id || inputID}>{label}</RequiredLabel>
+                label ?
+                    (
+                        required ?
+                            <RequiredLabel htmlFor={id || inputID}>{label}</RequiredLabel>
+                            : <Label htmlFor={id || inputID}>{label}</Label>
+                    )
                     : <></>
             }
             <Wrapper>
@@ -41,6 +50,7 @@ const InputTextValidator: React.FC<IProps> = ({
                     value={value}
                     onChange={onChange}
                     placeholder={placeholder}
+                    required={required}
                 />
             </Wrapper>
             {
@@ -54,7 +64,7 @@ const InputTextValidator: React.FC<IProps> = ({
     )
 }
 
-export default InputTextValidator
+export default InputTextGroupValidator
 
 const StyledInput = styled.input`
     padding-top: 0.75rem;

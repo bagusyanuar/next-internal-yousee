@@ -1,5 +1,5 @@
 import Divider from '@/components/divider'
-import Container from './section/container'
+import Container from './container'
 import HeaderSection from './section/header'
 import TableSection from './section/table'
 

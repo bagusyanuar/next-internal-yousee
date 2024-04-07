@@ -1,30 +1,52 @@
-import React, { CSSProperties, useCallback, useMemo, useState, useEffect } from 'react'
+'use client'
+
+import React, { CSSProperties, useCallback, useMemo, useState, useEffect, useId } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
+import Label from '@/components/input/label'
+import RequiredLabel from '@/components/input/label/label.required'
 import { useDropzone, FileRejection, DropEvent } from 'react-dropzone'
-import { ColorScheme } from '@/components/color'
-// import 'react-dropzone/examples/theme.css'
+import {
+    baseStyle,
+    acceptStyle,
+    focusedStyle,
+    rejectStyle,
+    img,
+    thumRemover,
+    thumb,
+    thumbInner,
+    thumbsContainer
+} from '../dropzone.style'
 
 interface IProps {
     onReceiveFiles: (files: File[]) => void
+    id?: string
+    label?: React.ReactNode
     maxSize?: number
     multiple?: boolean
     onRejectFiles?: (rejectionFiles: Array<FileRejection>) => void
     className?: string
+    required?: boolean
 }
 
 type TFileContent = {
     File: File
     Preview: string
 }
-const Dropzone: React.FC<IProps> = ({
+
+const InputFileGroupDropzone: React.FC<IProps> = ({
     onReceiveFiles,
+    id,
+    label,
     maxSize = 1000000,
     multiple = true,
     className = '',
-    onRejectFiles = (rejectionFIles: Array<FileRejection>) => { }
+    onRejectFiles = (rejectionFIles: Array<FileRejection>) => { },
+    required = false
 }) => {
     const [files, setFiles] = useState<Array<TFileContent>>([]);
+
+    const inputID = `input-file-${useId()}`
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         onReceiveFiles(acceptedFiles)
@@ -57,37 +79,48 @@ const Dropzone: React.FC<IProps> = ({
         onDropRejected
     })
 
+    const style = useMemo(() => ({
+        ...baseStyle,
+        ...(isFocused ? focusedStyle : {}),
+        ...(isDragAccept ? acceptStyle : {}),
+        ...(isDragReject ? rejectStyle : {})
+    }), [
+        isFocused,
+        isDragAccept,
+        isDragReject
+    ]);
 
-const style = useMemo(() => ({
-    ...baseStyle,
-    ...(isFocused ? focusedStyle : {}),
-    ...(isDragAccept ? acceptStyle : {}),
-    ...(isDragReject ? rejectStyle : {})
-}), [
-    isFocused,
-    isDragAccept,
-    isDragReject
-]);
+    const onRemoveFile = (files: Array<TFileContent>) => {
+        setFiles(files)
+    }
 
-const onRemoveFile = (files: Array<TFileContent>) => {
-    setFiles(files)
+    useEffect(() => {
+        // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+        return () => files.forEach(file => URL.revokeObjectURL(file.Preview));
+    }, [files]);
+
+    return (
+        <Wrapper className={className}>
+            {
+                label ?
+                    (
+                        required ?
+                            <RequiredLabel htmlFor={id || inputID}>{label}</RequiredLabel>
+                            : <Label htmlFor={id || inputID}>{label}</Label>
+                    )
+                    : <></>
+            }
+            <div className={`container`}>
+                <div {...getRootProps({ style })}>
+                    <input id={id || inputID} {...getInputProps()} />
+                    <Thumbnail files={files} onRemoveFile={onRemoveFile} />
+                </div>
+            </div>
+        </Wrapper>
+    )
 }
 
-useEffect(() => {
-    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () => files.forEach(file => URL.revokeObjectURL(file.Preview));
-}, [files]);
-return (
-    <div className={`container ${className}`}>
-        <div {...getRootProps({ style })}>
-            <input {...getInputProps()} />
-            <Thumbnail files={files} onRemoveFile={onRemoveFile} />
-        </div>
-    </div>
-)
-}
-
-export default Dropzone
+export default InputFileGroupDropzone
 
 interface IThumbnailProps {
     files: Array<TFileContent>
@@ -140,76 +173,9 @@ const Thumbnail: React.FC<IThumbnailProps> = ({
     )
 }
 
+const Wrapper = styled.div`
+    width:  100%;
+`
 const PlaceholderText = styled.p`
     text-align: center;
 `
-
-const baseStyle: CSSProperties = {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // padding: '20px',
-    borderWidth: 2,
-    borderRadius: 2,
-    borderColor: ColorScheme.textLight,
-    borderStyle: 'dashed',
-    backgroundColor: '#fafafa',
-    color: '#bdbdbd',
-    outline: 'none',
-    transition: 'border .24s ease-in-out',
-    minHeight: '10rem',
-    paddingTop: '10px',
-    paddingBottom: '10px'
-};
-
-const focusedStyle = {
-    borderColor: '#2196f3'
-};
-
-const acceptStyle = {
-    borderColor: '#00e676'
-};
-
-const rejectStyle = {
-    borderColor: '#ff1744'
-};
-
-const thumbsContainer: CSSProperties = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 16
-}
-
-const thumb: CSSProperties = {
-    display: 'inline-flex',
-    borderRadius: 2,
-    border: '1px solid #eaeaea',
-    marginBottom: 8,
-    marginRight: 8,
-    width: 100,
-    height: 100,
-    padding: 4,
-    boxSizing: 'border-box',
-    position: 'relative'
-};
-
-const thumRemover: CSSProperties = {
-    position: 'absolute',
-    right: 0,
-    top: 0
-}
-
-const thumbInner: CSSProperties = {
-    display: 'flex',
-    minWidth: 0,
-    overflow: 'hidden'
-};
-
-const img: CSSProperties = {
-    display: 'block',
-    width: 'auto',
-    height: '100%'
-};
