@@ -44,6 +44,48 @@ const StyledTHEAD = styled.thead`
     border-top: 1px solid ${ColorScheme.textDarkTint.tint80};
 `
 
+interface ITBODYProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export const TBODY: React.FC<ITBODYProps> = ({
+  children,
+  className = ''
+}) => {
+  return (
+    <StyledTBODY className={className}>
+      {children}
+    </StyledTBODY>
+  )
+}
+
+const StyledTBODY = styled.tbody`
+    background-color: inherit;
+    width: 100%;
+`
+
+interface ITRProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export const TR: React.FC<ITRProps> = ({
+  children,
+  className = ''
+}) => {
+  return (
+    <StyledTR className={className}>
+      {children}
+    </StyledTR>
+  )
+}
+
+const StyledTR = styled.tr`
+    background-color: transparent;
+    width: 100%;
+`
+
 export type TTHSort = {
   key: string,
   defaultDirection: 'asc' | 'desc'

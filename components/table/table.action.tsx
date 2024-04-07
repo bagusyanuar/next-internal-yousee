@@ -21,7 +21,7 @@ const TableAction: React.FC<IProps> = ({
     
     const handleDelete = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault()
-        onEdit()
+        onDelete()
     }
 
     return (

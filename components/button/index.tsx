@@ -30,6 +30,7 @@ const StyledButton = styled.button`
     color: whitesmoke;
     padding: 0.5rem 1rem;
     font-size: 0.8em;
+    border: 1px solid ${ColorScheme.primary};
     border-radius: 5px;
     transition: all ease-in-out 200ms;
 

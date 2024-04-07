@@ -6,21 +6,26 @@ import Button from '@/components/button/index'
 import ButtonOutlineDanger from '@/components/button/button.outline.danger'
 import { ColorScheme } from '@/components/color'
 import ImageQuestion from '@/public/assets/static/question.svg'
+import ImageRemove from '@/public/assets/static/remove.svg'
 
 
 interface IProps {
     open: boolean
     text?: string
+    type?: 'confirmation' | 'delete'
     className?: string
     onAccept: () => void
     onDenied: () => void
+    onBackdropClick?: () => void
 }
 const ModalConfirmation: React.FC<IProps> = ({
     open,
     text = 'Confirmation?',
+    type = 'confirmation',
     className = '',
     onAccept,
-    onDenied
+    onDenied,
+    onBackdropClick = () => { }
 }) => {
     const [openModal, setOpenModal] = useState<boolean>(false)
 
@@ -36,22 +41,24 @@ const ModalConfirmation: React.FC<IProps> = ({
     }, [open])
 
     return (
-        <Backdrop className={className} $open={open}>
-            <ModalWrapper className={`${openModal ? 'open' : ''}`}>
-                <Image src={ImageQuestion} alt='img-question' priority />
-                <ModalText>
-                    {text}
-                </ModalText>
-                <ActionWrapper>
-                    <ButtonAccept onClick={onAccept}>
-                        <i className='bx bx-check'></i>
-                        <span>YES</span>
-                    </ButtonAccept>
-                    <ButtonDenied onClick={onDenied}>
-                        <i className='bx bx-x'></i>
-                        <span>CANCEL</span>
-                    </ButtonDenied>
-                </ActionWrapper>
+        <Backdrop className={className} $open={open} onClick={onBackdropClick}>
+            <ModalWrapper onClick={(e) => { e.stopPropagation() }}>
+                <ModalContent className={`${openModal ? 'open' : ''}`}>
+                    {type === 'delete' ? <Image src={ImageRemove} alt='img-remove' priority /> : <Image src={ImageQuestion} alt='img-question' priority />}
+                    <ModalText>
+                        {text}
+                    </ModalText>
+                    <ActionWrapper>
+                        <ButtonAccept onClick={onAccept}>
+                            {/* <i className='bx bx-check'></i> */}
+                            <span>YES</span>
+                        </ButtonAccept>
+                        <ButtonDenied onClick={onDenied}>
+                            {/* <i className='bx bx-x'></i> */}
+                            <span>CANCEL</span>
+                        </ButtonDenied>
+                    </ActionWrapper>
+                </ModalContent>
             </ModalWrapper>
         </Backdrop>
     )
@@ -67,16 +74,22 @@ const Backdrop = styled.div<IBackdropProps>`
     display: ${({ $open }) => $open ? 'flex' : 'none'};
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(2px);
+    z-index: 100;
 `
-
-const ModalWrapper = styled(Card)`
+const ModalWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+const ModalContent = styled(Card)`
     display: flex;
     flex-direction: column;
     align-items: center;
