@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/color'
+import { FontSize } from '@/components/utils'
 
 interface IProps {
     to: string
@@ -34,7 +35,7 @@ const Wrapper = styled.a`
     transition: background-color ease-in-out 200ms, color ease-in-out 250ms;
     border-radius: 10px;
     padding: 0.75rem 0.75rem;
-    font-size: 1em;
+    font-size: ${FontSize.normal};
 
     &:hover {
         background-color: ${ColorScheme.primary};

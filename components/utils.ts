@@ -1,7 +1,9 @@
 export const FontSize = {
-    large: '1.5em',
-    normal: '1em',
-    small: '0.75em'
+    extraLarge: '1.2em',
+    large: '1em',
+    normal: '0.8em',
+    small: '0.6em',
+    extraSmall: '0.4em'
 }
 
 export const CardPadding = {
@@ -28,7 +30,8 @@ export const InputFontSize = {
 }
 
 export const ButtonPadding = {
-    small: '0.5rem 2rem',
+    small: '0.25rem 0.75rem',
+    normal: '0.5rem 1rem',
     medium: '0.75rem 2.5rem'
 }
 

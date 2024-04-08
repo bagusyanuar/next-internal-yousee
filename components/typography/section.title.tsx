@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/color'
+import { FontSize } from '@/components/utils'
 
 interface IProps {
     text: string,
@@ -21,6 +22,6 @@ export default SectionTitle
 
 const StyledText = styled.p`
     color: ${ColorScheme.textDark};
-    font-size: 1em;
+    font-size: ${FontSize.large};
     font-weight: 600;
 `

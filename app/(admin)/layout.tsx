@@ -32,7 +32,6 @@ export default async function RootLayout({
                     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
                 </head>
                 <body className={inter.className}>
-
                     <StyledComponentsRegistry>
                         <Suspense fallback={<LoaderDots height="100vh" />}>
                             <Layout>

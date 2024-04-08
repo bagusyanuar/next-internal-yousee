@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 `
 
 const StyledTitle = styled.p`
-    font-size: ${FontSize.large};
+    font-size: ${FontSize.extraLarge};
     font-weight: 500;
     color: ${ColorScheme.textDark};
     margin-bottom: 0.25rem;
