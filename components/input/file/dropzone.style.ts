@@ -2,6 +2,7 @@ import { CSSProperties } from 'react'
 import { ColorScheme } from '@/components/color'
 
 export const baseStyle: CSSProperties = {
+    cursor: 'pointer',
     flex: 1,
     display: 'flex',
     flexDirection: 'column',

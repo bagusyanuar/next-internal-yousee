@@ -17,6 +17,7 @@ interface IProps {
     className?: string
     placeholder?: string
     required?: boolean
+    disabled?: boolean
 }
 
 const InputTextGroupValidator: React.FC<IProps> = ({
@@ -28,7 +29,8 @@ const InputTextGroupValidator: React.FC<IProps> = ({
     onChange = (e) => { },
     className = '',
     placeholder = '',
-    required = false
+    required = false,
+    disabled = false
 }) => {
     const inputID = `input-field-${useId()}`
     return (
@@ -51,6 +53,7 @@ const InputTextGroupValidator: React.FC<IProps> = ({
                     onChange={onChange}
                     placeholder={placeholder}
                     required={required}
+                    disabled={disabled}
                 />
             </Wrapper>
             {

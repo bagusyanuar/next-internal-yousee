@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import Table from '@/components/table'
 import TableFilter from './filter'
@@ -17,8 +18,10 @@ import {
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 
 const Datatable: React.FC = () => {
+    const router = useRouter()
     const StateCategory = useAppSelector(CategoriesState)
     const dispatch = useAppDispatch()
+
 
     const data: Array<Category> = [
         {
@@ -37,6 +40,11 @@ const Datatable: React.FC = () => {
         dispatch(SetModalConfirmation(true))
     }
 
+    const handleEditCategory = (categoryID: number) => {
+        const url: string = `/category/${categoryID}`
+        router.push(url)
+    }
+
 
     return (
         <Wrapper>
@@ -46,6 +54,7 @@ const Datatable: React.FC = () => {
                 <TableBody
                     data={data}
                     onDelete={handleDeleteCategory}
+                    onEdit={handleEditCategory}
                 />
             </Table>
             <TablePagination />

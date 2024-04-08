@@ -1,9 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import InputText from '@/components/input/text/group/validator'
 import InputFile from '@/components/input/file/group/dropzone'
+import Divider from '@/components/divider'
+import ButtonSubmit from '@/components/button/button.submit'
+import ModalConfirmation from '@/components/modal/modal.confirmation'
 
 import {
     CategoriesState,
@@ -17,12 +20,37 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 const Form: React.FC = () => {
     const StateCategory = useAppSelector(CategoriesState)
     const dispatch = useAppDispatch()
+    const [icon, setIcon] = useState<File | null>(null)
 
-    const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(SetEntity({
             key: 'Name',
             value: e.currentTarget.value
         }))
+    }
+
+    const onReceiveFiles = (files: File[]) => {
+        if (files.length > 0) {
+            setIcon(files[0])
+        } else {
+            setIcon(null)
+        }
+    }
+
+    const onSubmit = () => {
+        dispatch(SetModalConfirmation(true))
+    }
+
+    const handleSubmit = () => {
+        dispatch(SetModalConfirmation(false))
+        dispatch(SetLoadingSave(true))
+        setTimeout(() => {
+            dispatch(SetLoadingSave(false))
+        }, 3500);
+    }
+
+    const onCancelSubmit = () => {
+        dispatch(SetModalConfirmation(false))
     }
 
     return (
@@ -34,13 +62,30 @@ const Form: React.FC = () => {
                     label='Category Name'
                     placeholder='Category Name'
                     required
-                    onChange={handleChangeInput}
+                    onChange={onChangeInput}
+                    disabled={StateCategory.LoadingSave}
                 />
-                <InputFile 
-                    onReceiveFiles={() => {}}
+                <InputFile
+                    onReceiveFiles={onReceiveFiles}
                     label='Category Icon'
+                    multiple={false}
+                    maxSize={1000000}
+                    disabled={StateCategory.LoadingSave}
                 />
             </FormWrapper>
+            <Divider />
+            <ActionWrapper>
+                <ButtonSubmit
+                    onLoading={StateCategory.LoadingSave}
+                    onSubmit={onSubmit}
+                />
+            </ActionWrapper>
+            <ModalConfirmation
+                open={StateCategory.ModalConfirmation}
+                text='Are you sure to create new category?'
+                onAccept={handleSubmit}
+                onDenied={onCancelSubmit}
+            />
         </Wrapper>
     )
 }
@@ -57,5 +102,11 @@ const FormWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 1rem;
+`
 
+const ActionWrapper = styled.div`
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
 `

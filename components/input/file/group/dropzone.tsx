@@ -5,7 +5,7 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import Label from '@/components/input/label'
 import RequiredLabel from '@/components/input/label/label.required'
-import { useDropzone, FileRejection, DropEvent } from 'react-dropzone'
+import { useDropzone, FileRejection, DropEvent, DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import {
     baseStyle,
     acceptStyle,
@@ -27,6 +27,7 @@ interface IProps {
     onRejectFiles?: (rejectionFiles: Array<FileRejection>) => void
     className?: string
     required?: boolean
+    disabled?: boolean
 }
 
 type TFileContent = {
@@ -42,7 +43,8 @@ const InputFileGroupDropzone: React.FC<IProps> = ({
     multiple = true,
     className = '',
     onRejectFiles = (rejectionFIles: Array<FileRejection>) => { },
-    required = false
+    required = false,
+    disabled = false
 }) => {
     const [files, setFiles] = useState<Array<TFileContent>>([]);
 
@@ -76,7 +78,8 @@ const InputFileGroupDropzone: React.FC<IProps> = ({
         maxSize: maxSize,
         multiple: multiple,
         onDrop,
-        onDropRejected
+        onDropRejected,
+        disabled: disabled
     })
 
     const style = useMemo(() => ({
