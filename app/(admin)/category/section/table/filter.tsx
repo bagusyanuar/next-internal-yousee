@@ -10,7 +10,7 @@ import {
     SetPerPage,
     SetQuery
 } from '@/redux/categories/slice'
-import { getCategoriesData } from '@/redux/categories/action'
+import { FindAll } from '@/redux/categories/action'
 
 const Filter: React.FC = () => {
     const StateCategory = useAppSelector(CategoriesState)
@@ -19,7 +19,7 @@ const Filter: React.FC = () => {
     const handleChangePerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const perPage: number = parseInt(e.currentTarget.value)
         dispatch(SetPerPage(perPage))
-        dispatch(getCategoriesData())
+        dispatch(FindAll())
     }
 
     const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

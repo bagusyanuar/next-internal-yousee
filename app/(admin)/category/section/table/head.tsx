@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import { THEAD, TR, TH } from '@/components/table'
+
+
 const Head: React.FC = () => {
     const [columnNameDirection, setColumnNameDirection] = useState<'asc' | 'desc'>('asc')
 
