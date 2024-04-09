@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
             <SidebarContainer>
                 <SidebarBrand />
                 <SidebarItemWrapper>
-                    <SidebarItem to='#' text='Dashboard' icon='bx bxs-dashboard' className={`${pathName.startsWith('/dashboard') ? 'active' : ''}`} />
+                    <SidebarItem to={ClientPath.dashboard.index} text='Dashboard' icon='bx bxs-dashboard' className={`${pathName.startsWith('/dashboard') ? 'active' : ''}`} />
                     <SidebarItem to='#' text='User' icon='bx bx-user' className={`${pathName.startsWith('/user') ? 'active' : ''}`} />
                     <SidebarItem to={ClientPath.category.index} text='Category' icon='bx bx-category-alt' className={`${pathName.startsWith('/category') ? 'active' : ''}`} />
                     <SidebarItem to='#' text='Vendor' icon='bx bx-network-chart' className={`${pathName.startsWith('/vendor') ? 'active' : ''}`} />

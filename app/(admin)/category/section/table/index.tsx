@@ -3,6 +3,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
+import Loader from '@/components/loader/loader.dots'
 import Table from '@/components/table'
 import TableFilter from './filter'
 import TableHeader from './head'
@@ -48,6 +49,7 @@ const Datatable: React.FC = () => {
 
     return (
         <Wrapper>
+            <Loader height='24rem' />
             <TableFilter />
             <Table>
                 <TableHeader />

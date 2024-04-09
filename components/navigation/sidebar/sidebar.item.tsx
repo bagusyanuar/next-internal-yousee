@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/color'
 import { FontSize } from '@/components/utils'
@@ -25,7 +26,7 @@ const SidebarItem: React.FC<IProps> = ({
 
 export default SidebarItem
 
-const Wrapper = styled.a`
+const Wrapper = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     display: flex;

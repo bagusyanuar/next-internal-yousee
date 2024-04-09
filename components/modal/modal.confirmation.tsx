@@ -5,6 +5,7 @@ import Card from '@/components/card'
 import Button from '@/components/button/index'
 import ButtonOutlineDanger from '@/components/button/button.outline.danger'
 import { ColorScheme } from '@/components/color'
+import { FontSize } from '@/components/utils'
 import ImageQuestion from '@/public/assets/static/question.svg'
 import ImageRemove from '@/public/assets/static/remove.svg'
 
@@ -45,6 +46,9 @@ const ModalConfirmation: React.FC<IProps> = ({
             <ModalWrapper onClick={(e) => { e.stopPropagation() }}>
                 <ModalContent className={`${openModal ? 'open' : ''}`}>
                     {type === 'delete' ? <Image src={ImageRemove} alt='img-remove' priority /> : <Image src={ImageQuestion} alt='img-question' priority />}
+                    <ModalTitle>
+                        CONFIRMATION!
+                    </ModalTitle>
                     <ModalText>
                         {text}
                     </ModalText>
@@ -115,6 +119,15 @@ const ModalContent = styled(Card)`
     
 `
 
+const ModalTitle = styled.p`
+    width: 100%;
+    text-align: center;
+    color: ${ColorScheme.textDarkTint.tint20};
+    font-size: ${FontSize.large};
+    font-weight: 600;
+    /* margin-bottom: 0.25rem; */
+`
+
 const ModalText = styled.p`
     width: 100%;
     text-align: center;
@@ -132,6 +145,7 @@ const ActionWrapper = styled.div`
 `
 
 const ButtonAccept = styled(Button)`
+    font-size: 0.7em;
     i{
         font-size: 1.5em;
         margin-right: 0.15rem;
@@ -139,6 +153,7 @@ const ButtonAccept = styled(Button)`
 `
 
 const ButtonDenied = styled(ButtonOutlineDanger)`
+    font-size: 0.7em;
     i{
         font-size: 1.5em;
         margin-right: 0.15rem;

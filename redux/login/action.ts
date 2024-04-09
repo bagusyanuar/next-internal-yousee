@@ -14,8 +14,15 @@ export const submit = createAsyncThunk<APIResponse, void, ThunkConfig>('login/su
             Password: state.login.Password,
             RememberMe: state.login.RememberMe
         }
-        const response = await axios.post(InternalAPI.login, body);
-        return response.data
+        await new Promise((resolve) => setTimeout(resolve, 2500));
+        const response: APIResponse = {
+            code: 200,
+            message: 'successfully login'
+        }
+        return response
+        // const response = await axios.post(InternalAPI.login, body);
+        // return response.data
+
     } catch (error: any | AxiosError) {
         return rejectWithValue(RejectToAPIResponse(error))
     }

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/color'
+import { FontSize, ButtonPadding } from '@/components/utils'
 
 interface IProps {
     children?: React.ReactNode
@@ -28,8 +29,8 @@ const StyledButton = styled.button`
     justify-content: center;
     background-color: white;
     color: ${ColorScheme.dangerTint.tint20};
-    padding: 0.5rem 1rem;
-    font-size: 0.8em;
+    padding: ${ButtonPadding.normal};
+    font-size: ${FontSize.normal};
     border-radius: 5px;
     border: 1px solid ${ColorScheme.dangerTint.tint20};
     transition: all ease-in-out 200ms;

@@ -122,7 +122,7 @@ const Form: React.FC<IProps> = ({
             </ActionWrapper>
             <ModalConfirmation
                 open={StateCategory.ModalConfirmation}
-                text='Are you sure to create new category?'
+                text='Are you sure to update category?'
                 onAccept={handleSubmit}
                 onDenied={onCancelSubmit}
             />

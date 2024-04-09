@@ -1,7 +1,10 @@
-import LoginPage from '@/components/pages/login'
+import Container from './container'
+import Form from './form'
 
 export default function Home() {
   return (
-    <LoginPage />
+    <Container>
+      <Form />
+    </Container>
   );
 }
