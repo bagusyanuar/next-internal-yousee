@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
-import TableServer from '@/components/table/server'
+import TableServer, { TColumn } from '@/components/table/server'
 import Loader from '@/components/loader/loader.dots'
 import Table from '@/components/table'
 import TableFilter from './filter'
@@ -44,10 +44,38 @@ const Datatable: React.FC = () => {
         return () => { }
     }, [initialPage])
 
+    const Columns: Array<TColumn<Category>> = [
+        {
+            title: '#',
+            selector: (row, index) => (index + 1),
+            align: 'center',
+            width: '3rem'
+        },
+        {
+            title: 'Name',
+            selector: (row) => row.Name,
+            sort: true
+        },
+        {
+            title: 'Action',
+            align: 'center',
+            width: '10rem'
+        },
+    ]
+
+    const handleSort = (key: string, direction: 'asc' | 'desc') => {
+        dispatch(FindAll())
+    }
     return (
         <Wrapper>
             <TableServer
-                onProcess={loading}
+                onProcess={StateCategory.LoadingData}
+                columns={Columns}
+                data={[
+                    { ID: 1, Name: 'Baliho', Icon: null },
+                    { ID: 2, Name: 'Billboard', Icon: null },
+                ]}
+                onSort={handleSort}
             />
             {/* {
                 StateCategory.LoadingData ?

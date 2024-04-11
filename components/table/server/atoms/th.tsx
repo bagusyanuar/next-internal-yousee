@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/color'
-
-export type TSORT = {
-    key: string,
-    defaultDirection: 'asc' | 'desc'
-    onSort: (key: string, direction: 'asc' | 'desc') => void
-}
+import { TSORT } from '../type'
 
 interface IProps {
     children: React.ReactNode
@@ -44,7 +39,7 @@ const TH: React.FC<IProps> = ({
                 break;
         }
     }
-    
+
     return (
         <StyledTH
             $width={width}

@@ -1,36 +1,74 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import TABLE from './atoms/table'
 import HEADER from './header'
-import THEAD from './atoms/thead'
-import TR from './atoms/tr'
-import TH from './atoms/th'
+import BODY from './body'
 import LoaderDots from '@/components/loader/loader.dots'
+import type { TColumn, TSORT, HeaderSort } from './type'
 
-export type TColumn<T> = {
-    title: string
-    onSort: (arg: T) => void
-}
-
-interface IProps {
+interface IProps<T> {
+    columns: Array<TColumn<T>>
+    data: Array<T>
     onProcess: boolean
+    onSort?: (key: string, direction: 'asc' | 'desc') => void
     loadingComponent?: React.ReactNode
 }
 
-const Table: React.FC<IProps> = ({
 
+const Table = <T,>({
+    columns,
+    data,
     onProcess,
+    onSort,
     loadingComponent = <LoaderDots height='24rem' />
-}) => {
+}: IProps<T>) => {
+
+    const [columnSort, setColumnSort] = useState<Array<HeaderSort>>([])
+
+    const initState = useCallback(() => {
+        let cSort: Array<HeaderSort> = []
+        columns.forEach((v, k) => {
+            if (v.sort) {
+                cSort.push({
+                    key: v.title,
+                    defaultDirection: 'asc',
+                })
+            }
+        })
+        setColumnSort(cSort)
+    }, [columns])
+
+    useEffect(() => {
+        initState()
+        return () => { }
+    }, [initState])
+
+    const handleSort = (key: string, direction: 'asc' | 'desc') => {
+        let tmpHeaderSort: Array<HeaderSort> = [...columnSort]
+        const idx: number = tmpHeaderSort.findIndex((e) => e.key === key)
+        console.log(tmpHeaderSort[idx]);
+        tmpHeaderSort[idx].defaultDirection = direction
+        setColumnSort(tmpHeaderSort)
+        if (onSort) {
+            console.log(columnSort);
+            onSort(key, direction)
+        }
+    }
     return (
         <Wrapper>
             {
                 onProcess ?
                     loadingComponent
                     : <TABLE>
-                        <THEAD>
+                        <HEADER
+                            columns={columns}
+                            columnSort={columnSort}
+                            onColumnSort={handleSort}
+                        />
+                        <BODY columns={columns} data={data} />
+                        {/* <THEAD>
                             <TR>
                                 <TH>#</TH>
                                 <TH>Name</TH>
@@ -43,7 +81,7 @@ const Table: React.FC<IProps> = ({
 
                                 }}>Action</TH>
                             </TR>
-                        </THEAD>
+                        </THEAD> */}
                     </TABLE>
             }
         </Wrapper>
