@@ -3,19 +3,16 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
-import TableServer, { TColumn } from '@/components/table/server'
-import Loader from '@/components/loader/loader.dots'
-import Table from '@/components/table'
-import TableFilter from './filter'
-import TableHeader from './head'
-import TableBody from './body'
+import TableServer, { TColumn, TableAction } from '@/components/table/server'
 import TablePagination from './pagination'
 import ModalConfirmation from '@/components/modal/modal.confirmation'
 import type { Category } from '@/model/category'
 
 import {
     CategoriesState,
-    SetModalConfirmation
+    SetModalConfirmation,
+    SetPerPage,
+    SetQuery
 } from '@/redux/categories/slice'
 import { FindAll } from '@/redux/categories/action'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
@@ -24,7 +21,6 @@ const Datatable: React.FC = () => {
     const router = useRouter()
     const StateCategory = useAppSelector(CategoriesState)
     const dispatch = useAppDispatch()
-    const [loading, setloading] = useState<boolean>(false)
 
     const handleDeleteCategory = (categoryID: number) => {
         dispatch(SetModalConfirmation(true))
@@ -49,22 +45,36 @@ const Datatable: React.FC = () => {
             title: '#',
             selector: (row, index) => (index + 1),
             align: 'center',
-            width: '3rem'
+            width: '4rem'
         },
         {
             title: 'Name',
             selector: (row) => row.Name,
-            sort: true
+            sort: true,
         },
         {
             title: 'Action',
             align: 'center',
-            width: '10rem'
+            width: '8rem',
+            selector: (row) => {
+                return <TableAction
+                    onDelete={() => {
+                        handleDeleteCategory(row.ID)
+                    }}
+                    onEdit={() => {
+                        handleEditCategory(row.ID)
+                    }}
+                />
+            }
         },
     ]
 
     const handleSort = (key: string, direction: 'asc' | 'desc') => {
         dispatch(FindAll())
+    }
+
+    const handleChangePerPage = (perPage: number) => {
+        dispatch(SetPerPage(perPage))
     }
     return (
         <Wrapper>
@@ -75,24 +85,22 @@ const Datatable: React.FC = () => {
                     { ID: 1, Name: 'Baliho', Icon: null },
                     { ID: 2, Name: 'Billboard', Icon: null },
                 ]}
+                pageLength={StateCategory.Pagination.PageLength}
+                perPage={StateCategory.Pagination.PerPage}
+                page={1}
+                totalPage={1}
+                totalRows={1}
+                onPerpageChange={handleChangePerPage}
+                onPageChange={(page) => { }}
                 onSort={handleSort}
+                search={{
+                    value: StateCategory.Query,
+                    onSearch: (value: string) => {
+                        dispatch(SetQuery(value))
+                    },
+                    placeholder: 'search category...'
+                }}
             />
-            {/* {
-                StateCategory.LoadingData ?
-                    <Loader height='24rem' />
-                    : <>
-                        <TableFilter />
-                        <Table>
-                            <TableHeader />
-                            <TableBody
-                                data={StateCategory.Categories}
-                                onDelete={handleDeleteCategory}
-                                onEdit={handleEditCategory}
-                            />
-                        </Table>
-                        <TablePagination />
-                    </>
-            } */}
             <ModalConfirmation
                 open={StateCategory.ModalConfirmation}
                 text='Are you sure to delete category?'

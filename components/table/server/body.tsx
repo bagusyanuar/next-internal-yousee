@@ -22,7 +22,10 @@ const Body = <T,>({
                     return <TR key={k}>
                         {
                             columns.map((vColumn, kColumn) => {
-                                return <TD key={kColumn} align={vColumn.align}>
+                                return <TD
+                                    key={kColumn}
+                                    align={vColumn.align}
+                                >
                                     {vColumn.selector ? vColumn.selector(v, k) : <></>}
                                 </TD>
                             })

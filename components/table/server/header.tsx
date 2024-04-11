@@ -4,12 +4,12 @@ import React from 'react'
 import THEAD from './atoms/thead'
 import TR from './atoms/tr'
 import TH from './atoms/th'
-import type { TColumn, TSORT, HeaderSort } from './type'
+import type { TColumn, TSORT, HeaderSort, TSortDirectionOption } from './type'
 
 export interface ITableHeaderProps<T> {
     columns: Array<TColumn<T>>
     columnSort: Array<HeaderSort>
-    onColumnSort?: (key: string, direction: 'asc' | 'desc') => void
+    onColumnSort?: (key: string, direction: TSortDirectionOption) => void
 }
 
 const Header = <T,>({
@@ -26,12 +26,12 @@ const Header = <T,>({
                         let sort: TSORT | undefined = undefined
                         if (v.sort) {
                             const title: string = v.title
-                            const c: HeaderSort | undefined = columnSort.find(e => e.key === title)
-                            if (c) {
+                            const selectedHeader: HeaderSort | undefined = columnSort.find(e => e.key === title)
+                            if (selectedHeader) {
                                 sort = {
-                                    key: c.key,
-                                    defaultDirection: c.defaultDirection,
-                                    onSort: (key: string, direction: 'asc' | 'desc') => {
+                                    key: selectedHeader.key,
+                                    defaultDirection: selectedHeader.defaultDirection,
+                                    onSort: (key: string, direction: TSortDirectionOption) => {
                                         if (onColumnSort) {
                                             onColumnSort(key, direction)
                                         }

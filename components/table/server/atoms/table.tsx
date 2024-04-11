@@ -18,4 +18,7 @@ export default Table
 const Wrapper = styled.table`
     width: 100%;
     background: transparent;
+    /* max-width: fit-content; */
+    overflow-x: auto;
+    white-space: nowrap;
 `

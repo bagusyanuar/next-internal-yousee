@@ -11,8 +11,6 @@ const onGetCategoriesBuilder = (builder: ActionReducerMapBuilder<TState>): Actio
         state.LoadingData = false
         const data: Array<any> = payload.data as Array<any> ?? []
         const categories: Array<Category> = transformToCategories(data)
-        console.log(categories);
-        
         state.Categories = categories
         
     }).addCase(FindAll.rejected, (state, { payload }) => {

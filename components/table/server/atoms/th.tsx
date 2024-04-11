@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ColorScheme } from '@/components/color'
-import { TSORT } from '../type'
+import { TSORT, TSortDirectionOption } from '../type'
 
 interface IProps {
     children: React.ReactNode
@@ -18,7 +18,7 @@ const TH: React.FC<IProps> = ({
     align = 'left',
     sort
 }) => {
-    const [direction, setDirection] = useState<'asc' | 'desc'>(sort ? sort.defaultDirection : 'asc')
+    const [direction, setDirection] = useState<TSortDirectionOption>(sort ? sort.defaultDirection : 'asc')
 
     const handleSort = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault()
@@ -66,6 +66,7 @@ const StyledTH = styled.th<TStyledTHProps>`
     font-size: 0.8em;
     font-weight: 600;
     color: ${ColorScheme.textDark};
+    /* min-width: ${({ $width }) => $width ? $width : 'auto'}; */
     width: ${({ $width }) => $width ? $width : 'auto'};
   `
 

@@ -1,12 +1,20 @@
+export type TSortDirectionOption = 'asc' | 'desc'
+
 export type TSORT = {
     key: string,
-    defaultDirection: 'asc' | 'desc'
-    onSort: (key: string, direction: 'asc' | 'desc') => void
+    defaultDirection: TSortDirectionOption
+    onSort: (key: string, direction: TSortDirectionOption) => void
 }
 
 export type HeaderSort = {
     key: string,
-    defaultDirection: 'asc' | 'desc'
+    defaultDirection: TSortDirectionOption
+}
+
+export type TSearch = {
+    value: string
+    onSearch: (value: string) => void
+    placeholder?: string
 }
 
 export interface TColumn<T> {

@@ -19,6 +19,6 @@ const THEAD: React.FC<IProps> = ({
 export default THEAD
 
 const StyledTHEAD = styled.thead`
-      border-bottom: 1px solid ${ColorScheme.textDarkTint.tint80};
-      border-top: 1px solid ${ColorScheme.textDarkTint.tint80};
+    border-bottom: 1px solid ${ColorScheme.textDarkTint.tint80};
+    border-top: 1px solid ${ColorScheme.textDarkTint.tint80};
   `
