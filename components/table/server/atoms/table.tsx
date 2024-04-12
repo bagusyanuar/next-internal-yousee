@@ -3,22 +3,21 @@ import styled from 'styled-components'
 
 interface IProps {
     children: React.ReactNode
+    scroll?: boolean
 }
 
 const Table: React.FC<IProps> = ({
-    children
+    children,
+    scroll = false
 }) => {
     return (
-        <Wrapper>{children}</Wrapper>
+        <Wrapper $scroll={scroll}>{children}</Wrapper>
     )
 }
 
 export default Table
 
-const Wrapper = styled.table`
-    width: 100%;
+const Wrapper = styled.table<{ $scroll: boolean }>`
+    ${({ $scroll }) => $scroll ? '' : 'width: 100%;'}
     background: transparent;
-    /* max-width: fit-content; */
-    overflow-x: auto;
-    white-space: nowrap;
 `

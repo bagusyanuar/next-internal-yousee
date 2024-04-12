@@ -9,6 +9,7 @@ interface IProps {
     width?: string
     align?: 'left' | 'center' | 'right'
     sort?: TSORT
+    scroll?: boolean
 }
 
 const TH: React.FC<IProps> = ({
@@ -16,7 +17,8 @@ const TH: React.FC<IProps> = ({
     className = '',
     width,
     align = 'left',
-    sort
+    sort,
+    scroll = false
 }) => {
     const [direction, setDirection] = useState<TSortDirectionOption>(sort ? sort.defaultDirection : 'asc')
 
@@ -44,6 +46,7 @@ const TH: React.FC<IProps> = ({
         <StyledTH
             $width={width}
             className={className}
+            $scroll={scroll}
         >
             <StyledTHContent $align={align}>
                 <span>{children}</span>
@@ -61,13 +64,24 @@ export default TH
 
 type TStyledTHProps = {
     $width?: string
+    $scroll?: boolean
+}
+
+const generateWidth = ({ $width, $scroll }: TStyledTHProps): string => {
+    if ($width === undefined || $width === '') {
+        return 'width: auto;'
+    }
+
+    if (!$scroll) {
+        return `width: ${$width};`
+    }
+    return `min-width: ${$width};`
 }
 const StyledTH = styled.th<TStyledTHProps>`
     font-size: 0.8em;
     font-weight: 600;
     color: ${ColorScheme.textDark};
-    /* min-width: ${({ $width }) => $width ? $width : 'auto'}; */
-    width: ${({ $width }) => $width ? $width : 'auto'};
+    ${generateWidth}
   `
 
 type TStyledTHContentProps = {

@@ -16,7 +16,13 @@ export const FindAll = createAsyncThunk<APIResponse, void, ThunkConfig>('categor
         const response: APIResponse = {
             code: 200,
             message: 'successfully show categories',
-            data: List
+            data: List,
+            meta: {
+                page: 1,
+                per_page: 10,
+                total_page: 1,
+                total_rows: List.length
+            }
         }
         return response
     } catch (error: any | AxiosError) {

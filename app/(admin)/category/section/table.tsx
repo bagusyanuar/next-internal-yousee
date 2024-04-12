@@ -3,8 +3,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
+import debounce from 'lodash/debounce'
 import TableServer, { TColumn, TableAction } from '@/components/table/server'
-import TablePagination from './pagination'
 import ModalConfirmation from '@/components/modal/modal.confirmation'
 import type { Category } from '@/model/category'
 
@@ -45,7 +45,7 @@ const Datatable: React.FC = () => {
             title: '#',
             selector: (row, index) => (index + 1),
             align: 'center',
-            width: '4rem'
+            width: '5rem'
         },
         {
             title: 'Name',
@@ -76,20 +76,26 @@ const Datatable: React.FC = () => {
     const handleChangePerPage = (perPage: number) => {
         dispatch(SetPerPage(perPage))
     }
+
+    const handleSearch = () => {
+        console.log('fetch...');
+        dispatch(FindAll())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const debounceSearch = useCallback(debounce(handleSearch, 1500),[])
+    
+
     return (
         <Wrapper>
             <TableServer
                 onProcess={StateCategory.LoadingData}
                 columns={Columns}
-                data={[
-                    { ID: 1, Name: 'Baliho', Icon: null },
-                    { ID: 2, Name: 'Billboard', Icon: null },
-                ]}
+                data={StateCategory.Categories}
                 pageLength={StateCategory.Pagination.PageLength}
                 perPage={StateCategory.Pagination.PerPage}
-                page={1}
-                totalPage={1}
-                totalRows={1}
+                page={StateCategory.Pagination.Page}
+                totalPage={StateCategory.Pagination.TotalPage}
+                totalRows={StateCategory.Pagination.Rows}
                 onPerpageChange={handleChangePerPage}
                 onPageChange={(page) => { }}
                 onSort={handleSort}
@@ -97,6 +103,7 @@ const Datatable: React.FC = () => {
                     value: StateCategory.Query,
                     onSearch: (value: string) => {
                         dispatch(SetQuery(value))
+                        debounceSearch()
                     },
                     placeholder: 'search category...'
                 }}

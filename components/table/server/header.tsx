@@ -10,12 +10,14 @@ export interface ITableHeaderProps<T> {
     columns: Array<TColumn<T>>
     columnSort: Array<HeaderSort>
     onColumnSort?: (key: string, direction: TSortDirectionOption) => void
+    scroll?: boolean
 }
 
 const Header = <T,>({
     columns,
     columnSort,
-    onColumnSort
+    onColumnSort,
+    scroll = false
 }: ITableHeaderProps<T>) => {
 
     return (
@@ -44,6 +46,7 @@ const Header = <T,>({
                             align={v.align}
                             width={v.width}
                             sort={sort}
+                            scroll={scroll}
                         >
                             {v.title}
                         </TH>

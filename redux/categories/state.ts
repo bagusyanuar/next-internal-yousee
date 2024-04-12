@@ -13,6 +13,7 @@ type TPagination = {
     PerPage: number
     Page: number
     Rows: number
+    TotalPage: number
 }
 
 export type TSort = {
@@ -36,7 +37,8 @@ const initialState: TState = {
         PageLength: [10, 25, 50],
         PerPage: 10,
         Page: 1,
-        Rows: 0
+        Rows: 0,
+        TotalPage: 0
     },
     Query: '',
     Sort: undefined,

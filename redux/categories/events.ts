@@ -11,6 +11,12 @@ const onGetCategoriesBuilder = (builder: ActionReducerMapBuilder<TState>): Actio
         state.LoadingData = false
         const data: Array<any> = payload.data as Array<any> ?? []
         const categories: Array<Category> = transformToCategories(data)
+        const meta: any = payload.meta
+        if (meta) {
+            state.Pagination.Rows = meta['total_rows']
+            state.Pagination.Page = meta['page']
+            state.Pagination.TotalPage = meta['total_page']
+        }
         state.Categories = categories
         
     }).addCase(FindAll.rejected, (state, { payload }) => {

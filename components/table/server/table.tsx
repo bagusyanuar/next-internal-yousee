@@ -25,6 +25,7 @@ interface IProps<T> {
     onProcess?: boolean
     onSort?: (key: string, direction: TSortDirectionOption) => void
     loadingComponent?: React.ReactNode
+    scrollX?: boolean
 }
 
 
@@ -41,7 +42,8 @@ const Table = <T,>({
     onProcess = false,
     search,
     onSort,
-    loadingComponent = <LoaderDots height='24rem' />
+    loadingComponent = <LoaderDots height='24rem' />,
+    scrollX = false
 }: IProps<T>) => {
     const [columnSort, setColumnSort] = useState<Array<HeaderSort>>([])
 
@@ -56,6 +58,7 @@ const Table = <T,>({
             }
         })
         setColumnSort(cSort)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -64,6 +67,8 @@ const Table = <T,>({
     }, [initState])
 
     const onColumnSort = (key: string, direction: TSortDirectionOption) => {
+        console.log(key, direction);
+
         let headerSort: Array<HeaderSort> = [...columnSort]
         const index: number = headerSort.findIndex((e) => e.key === key)
         headerSort[index].defaultDirection = direction
@@ -106,14 +111,17 @@ const Table = <T,>({
                             }
 
                         </ExtensionWrapper>
-                        <TABLE>
-                            <HEADER
-                                columns={columns}
-                                columnSort={columnSort}
-                                onColumnSort={onColumnSort}
-                            />
-                            <BODY columns={columns} data={data} />
-                        </TABLE>
+                        <TableWrapper>
+                            <TABLE scroll={scrollX}>
+                                <HEADER
+                                    columns={columns}
+                                    columnSort={columnSort}
+                                    onColumnSort={onColumnSort}
+                                    scroll={scrollX}
+                                />
+                                <BODY columns={columns} data={data} />
+                            </TABLE>
+                        </TableWrapper>
                         <TablePagination
                             page={page}
                             totalPage={totalPage}
@@ -140,4 +148,9 @@ const ExtensionWrapper = styled.div`
 
 const Search = styled(TableSearch)`
     width: 200px;
+`
+
+const TableWrapper = styled.div`
+    width: 100%;
+    overflow-x: auto;
 `
