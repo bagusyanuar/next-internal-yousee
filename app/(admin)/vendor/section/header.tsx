@@ -11,12 +11,12 @@ const Header: React.FC = () => {
     const router = useRouter()
 
     const handleGoToAddPage = () => {
-        router.push(ClientPath.category.add)
+        router.push(ClientPath.vendor.add)
     }
     
     return (
         <Wrapper>
-            <SectionTitle text='Categories Data' />
+            <SectionTitle text='Vendor List' />
             <ButtonADD onClick={handleGoToAddPage} />
         </Wrapper>
     )

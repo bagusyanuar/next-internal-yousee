@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/redux/store'
 import type { PayloadEntity } from '@/lib/redux'
-import initialState, { TSort } from './state'
+import type { TSort } from '@/model/meta'
+import initialState from './state'
 import eventReducers from './events'
 
 const slice = createSlice({
-    name: 'category',
+    name: 'vendor',
     initialState,
     reducers: {
         Reset: () => initialState,
@@ -24,11 +25,6 @@ const slice = createSlice({
         SetSort: (state, action: PayloadAction<TSort>) => {
             state.Sort = action.payload
         },
-        SetEntity: (state, action: PayloadAction<PayloadEntity>) => {
-            if (action.payload.key === "Name") {
-                state.Entity.Name = action.payload.value as string
-            }
-        },
         SetLoadingSave: (state, action: PayloadAction<boolean>) => {
             state.LoadingSave = action.payload
         },
@@ -46,10 +42,9 @@ export const {
     SetPage,
     SetQuery,
     SetSort,
-    SetEntity,
     SetLoadingSave,
     SetModalConfirmation
 } = slice.actions
 
-export const CategoriesState = (state: RootState) => state.categories
+export const VendorState = (state: RootState) => state.vendor
 export default slice.reducer

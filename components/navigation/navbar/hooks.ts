@@ -21,6 +21,11 @@ export function useNavbarTitle(pathname: string): TNavbarTitle {
         value.SubTitle = 'Manage yousee product category'
     }
     
+    if (pathname.startsWith('/vendor')) {
+        value.Title = 'Vendor'
+        value.SubTitle = 'Manage yousee product vendor'
+    }
+    
     // switch (pathname) {
     //     case ClientPath.dashboard.index:
     //         value.Title = 'Dashboard'

@@ -8,5 +8,9 @@ export const ClientPath = {
     category: {
         index: '/category',
         add: '/category/add'
+    },
+    vendor: {
+        index: '/vendor',
+        add: '/vendor/add'
     }
 }

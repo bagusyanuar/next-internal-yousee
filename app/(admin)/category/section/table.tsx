@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import debounce from 'lodash/debounce'
